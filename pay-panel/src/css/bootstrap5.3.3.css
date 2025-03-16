@@ -3373,7 +3373,7 @@ fieldset:disabled .btn {
 
 .btn-outline-tertiary {
   --bs-btn-color: #6c757d;
-  --bs-btn-border-color: #f0ba0a;
+  --bs-btn-border-color: #6c757d;
   --bs-btn-hover-border-color: #f00a0a57;
   --bs-btn-active-color: #fff;
   --bs-btn-active-bg: #6c757d;

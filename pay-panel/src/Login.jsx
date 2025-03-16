@@ -25,7 +25,10 @@ function Login({ setIsAuthenticated }) {
   return (
     <div className="d-flex justify-content-center align-items-center min-vh-100">
       <div className="row w-100 justify-content-center">
-        <div className="card border-tertiary bg-primary shadow-custom-3 p-5 col-xl-4 col-xxl-3 col-lg-6 col-md-8 col-sm-2" style={{ maxWidth: "400px", minWidth: "300px" }}>
+        <div
+          className="card border-tertiary bg-primary shadow-custom-3 p-5 col-xl-4 col-xxl-3 col-lg-6 col-md-8 col-sm-2"
+          style={{ maxWidth: "400px", minWidth: "300px" }}
+        >
           <div className="my-4">
             <img
               src="/paylogoyeni.svg"
@@ -66,7 +69,7 @@ function Login({ setIsAuthenticated }) {
                 >
                   Parolanız
                 </label>
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center mb-2">
                   <input
                     type="password"
                     className="form-control "
@@ -75,12 +78,24 @@ function Login({ setIsAuthenticated }) {
                 </div>
               </div>
             </form>
-            <button
-              className="btn btn-outline-quaternary"
-              onClick={handleLogin}
+            <div className="mb-3">
+              <button
+                className="btn btn-outline-quaternary"
+                onClick={handleLogin}
+              >
+                Giriş Yap <i class="bi bi-box-arrow-in-right"></i>
+              </button>
+            </div>
+
+            <div
+              className="text-primary"
+              style={{ fontSize: "14px" }}
             >
-              Giriş Yap
-            </button>
+              <sub>
+                Kullanıcı adı ve parolanız için sipariş bilgilerinizi içeren
+                mail'e gözatınız.
+              </sub>
+            </div>
           </div>
         </div>
       </div>

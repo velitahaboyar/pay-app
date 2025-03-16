@@ -1,7 +1,18 @@
-import React from "react";
+// import React, { useEffect } from "react";
+// import { Navigate, useNavigate } from "react-router-dom";
 
 function Header() {
-  const name = localStorage.getItem("userName");
+    const name = localStorage.getItem("userName");
+  //   const Navigate = useNavigate();
+
+  //   useEffect(() => {
+  //     if (
+  //       localStorage.getItem("userName") == "undefined" ||
+  //       localStorage.getItem("userName") === null
+  //     ) {
+  //       Navigate("/");
+  //     }
+  //   });
 
   return (
     <nav className="bg-primary navbar w-100 shadow-custom">

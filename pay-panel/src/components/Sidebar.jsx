@@ -3,26 +3,29 @@ import "../css/sidebar.css";
 
 function Sidebar() {
   return (
-    <div className="d-flex flex-column shadow-custom" style={{height:"100%"}}>
+    <div
+      className="d-flex flex-column shadow-custom"
+      style={{ height: "100%" }}
+    >
       <div className="bg-primary d-flex p-3 flex-grow-1 w-100 text-primary">
         <div id="nav-links" className="navbar-collapse mt-4">
           <ul className="navbar-nav text-center">
             <li className="nav-item">
               <a href="/Homepage" className="nav-link text-primary">
-                Ana Sayfa
+                Ana Sayfa <i className="bi bi-house text-tertiary"></i>
               </a>
             </li>
             <hr className="text-tertiary w-75 align-self-center" />
 
             <li className="nav-item">
               <a href="/Newdata" className="nav-link text-primary">
-                Komisyon Ekle
+                Komisyon Ekle <i className="bi bi-person-plus text-tertiary" width="50px"></i>
               </a>
             </li>
             <hr className="text-tertiary w-75 align-self-center" />
             <li className="nav-item">
               <a href="/Showdata" className="nav-link text-primary">
-                Görüntüle
+                Komisyonları Görüntüle <i className="bi bi-eye text-tertiary"></i>
               </a>
             </li>
             <hr className="text-tertiary w-75 align-self-center" />
@@ -35,10 +38,10 @@ function Sidebar() {
                 id="exit-button"
               >
                 <button
-                  className="btn btn-outline-tertiary "
+                  className="btn btn-outline-tertiary"
                   id="btn-hover-none"
                 >
-                  Çıkış Yap
+                  Çıkış Yap <i className="bi bi-door-open"></i>
                 </button>
               </a>
             </li>
