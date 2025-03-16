@@ -1,0 +1,12 @@
+/* sidebar'da bulunan linklere scale efekti baslangıcı*/
+
+.nav-item {
+  transition: all 0.2s;
+}
+
+.nav-item:hover {
+  scale: 1.05;
+}
+
+/* sidebar'da bulunan linklere scale efekti bitisi*/
+
