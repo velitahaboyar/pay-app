@@ -5,6 +5,7 @@ import Sidebar from "./components/Sidebar.jsx";
 import Homepage from "./Homepage.jsx";
 import { useState, useEffect } from "react";
 import Login from "./Login.jsx";
+import Newdata from "./Newdata.jsx";
 
 function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1280);
@@ -38,8 +39,9 @@ function App() {
             {/* grid ile tüm sayfa görüntüleme*/}
             <div className={`${isMobile ? "col-12" : "col-11"}`}>
               <Routes>
-                <Route path="/" element={<Navigate to="/Homepage" />} />
+                <Route path="/" element={<Navigate to="/Newdata" />} />
                 <Route path="/Homepage" element={<Homepage />} />
+                <Route path="/Newdata" element={<Newdata />} />
               </Routes>
             </div>
           </div>
