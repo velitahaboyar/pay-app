@@ -1,5 +1,12 @@
 import React from "react";
 import "../css/sidebar.css";
+import { IoHomeOutline } from "react-icons/io5";
+import { IoIosPeople } from "react-icons/io";
+import { MdQueryStats } from "react-icons/md";
+import { GoPersonAdd } from "react-icons/go";
+import { GoPeople } from "react-icons/go";
+import { FaUserGroup } from "react-icons/fa6";
+import { ImExit } from "react-icons/im";
 
 function Sidebar() {
   return (
@@ -12,23 +19,23 @@ function Sidebar() {
           <ul className="navbar-nav text-center">
             <li className="nav-item">
               <a href="/Homepage" className="nav-link text-primary">
-                Ana Sayfa <i className="bi bi-house text-tertiary"></i>
+                Dashboard <MdQueryStats size={"24"} />
               </a>
             </li>
-            <hr className="text-tertiary w-75 align-self-center" />
+            <hr className="text-tertiary w-50 align-self-center" />
 
             <li className="nav-item">
               <a href="/Newdata" className="nav-link text-primary">
-                Komisyon Ekle <i className="bi bi-person-plus text-tertiary" width="50px"></i>
+               Yeni Komisyon Ekle <GoPersonAdd size={"24"} />
               </a>
             </li>
-            <hr className="text-tertiary w-75 align-self-center" />
+            <hr className="text-tertiary w-50 align-self-center" />
             <li className="nav-item">
               <a href="/Showdata" className="nav-link text-primary">
-                Komisyonları Görüntüle <i className="bi bi-eye text-tertiary"></i>
+                Komisyonları Görüntüle <GoPeople size={"22"} />
               </a>
             </li>
-            <hr className="text-tertiary w-75 align-self-center" />
+            <hr className="text-tertiary w-50 align-self-center" />
           </ul>
           <ul className="navbar-nav text-center">
             <li className="nav-item">
@@ -41,7 +48,7 @@ function Sidebar() {
                   className="btn btn-outline-tertiary"
                   id="btn-hover-none"
                 >
-                  Çıkış Yap <i className="bi bi-door-open"></i>
+                  Çıkış Yap <ImExit />
                 </button>
               </a>
             </li>

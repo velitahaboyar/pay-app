@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { IoIosLogIn } from "react-icons/io";
 
 function Login({ setIsAuthenticated }) {
   const [name, setName] = useState();
@@ -83,16 +84,13 @@ function Login({ setIsAuthenticated }) {
                 className="btn btn-outline-quaternary"
                 onClick={handleLogin}
               >
-                Giriş Yap <i class="bi bi-box-arrow-in-right"></i>
+                Giriş Yap <IoIosLogIn className="text-tertiary" size={"20"} />
               </button>
             </div>
 
-            <div
-              className="text-primary"
-              style={{ fontSize: "14px" }}
-            >
+            <div className="text-primary" style={{ fontSize: "14px" }}>
               <sub>
-                Kullanıcı adı ve parolanız için sipariş bilgilerinizi içeren
+                *Kullanıcı adı ve parolanız için sipariş bilgilerinizi içeren
                 mail'e gözatınız.
               </sub>
             </div>

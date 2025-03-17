@@ -1,8 +1,9 @@
 // import React, { useEffect } from "react";
 // import { Navigate, useNavigate } from "react-router-dom";
+import { PiHandHeartDuotone } from "react-icons/pi";
 
 function Header() {
-    const name = localStorage.getItem("userName");
+  const name = localStorage.getItem("userName");
   //   const Navigate = useNavigate();
 
   //   useEffect(() => {
@@ -29,17 +30,12 @@ function Header() {
             </a>
           </div>
           <div className="d-flex">
-            <div
-              id="user-info-div"
-              className="d-flex gap-4 align-items-center justify-content-between"
-            >
+            <div id="user-info-div" className="d-flex flex-column justify-content-evenly align-items-start">
               <span className="text-primary">
-                Hoşgeldin
-                <h4>
-                  {name}
-                  <i className="bi bi-lightning-charge text-tertiary"></i>
-                </h4>
+                Hoşgeldin{" "}
+                <PiHandHeartDuotone className="text-tertiary" size={"20"} />
               </span>
+              <h4 className="text-primary">{name}</h4>
             </div>
           </div>
         </div>

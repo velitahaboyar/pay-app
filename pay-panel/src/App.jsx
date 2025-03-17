@@ -21,7 +21,7 @@ function App() {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      {/* Eğer giriş yapılmışsa Header ve Sidebar gösterilecek */}
+      {/* authentication islemi */}
       {isAuthenticated ? (
         <>
           <div id="header">
@@ -30,13 +30,13 @@ function App() {
           <div className="d-flex flex-grow-1">
             {/* Sidebar */}
             {!isMobile && (
-              <div className="col-2">
+              <div className="col-1">
                 <Sidebar />
               </div>
             )}
 
-            {/* Ana içerik */}
-            <div className={`${isMobile ? "col-12" : "col-10"}`}>
+            {/* grid ile tüm sayfa görüntüleme*/}
+            <div className={`${isMobile ? "col-12" : "col-11"}`}>
               <Routes>
                 <Route path="/" element={<Navigate to="/Homepage" />} />
                 <Route path="/Homepage" element={<Homepage />} />
@@ -46,7 +46,10 @@ function App() {
         </>
       ) : (
         <Routes>
-          <Route path="/" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+          <Route
+            path="/"
+            element={<Login setIsAuthenticated={setIsAuthenticated} />}
+          />
         </Routes>
       )}
     </div>
