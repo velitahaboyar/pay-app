@@ -4,7 +4,7 @@ import { PiHandHeartDuotone } from "react-icons/pi";
 
 
 
-function Homepage() {
+function Dashboard() {
   return (
     <div className="d-flex" style={{height:"100%"}}>
       <div className="container d-flex align-items-center">
@@ -42,4 +42,4 @@ function Homepage() {
   );
 }
 
-export default Homepage;
+export default Dashboard;

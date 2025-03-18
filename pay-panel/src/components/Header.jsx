@@ -1,7 +1,7 @@
 // import React, { useEffect } from "react";
 // import { Navigate, useNavigate } from "react-router-dom";
 import { PiHandHeartDuotone } from "react-icons/pi";
-
+import { Dropdown } from "react-bootstrap";
 function Header() {
   const name = localStorage.getItem("userName");
   //   const Navigate = useNavigate();
@@ -30,12 +30,44 @@ function Header() {
             </a>
           </div>
           <div className="d-flex">
-            <div id="user-info-div" className="d-flex flex-column justify-content-evenly align-items-start">
+            <div
+              id="user-info-div"
+              className="d-flex flex-column justify-content-evenly align-items-start"
+            >
               <span className="text-primary">
                 Hoşgeldin{" "}
                 <PiHandHeartDuotone className="text-tertiary" size={"20"} />
               </span>
-              <h4 className="text-primary">{name}</h4>
+              <div className="d-flex">
+                <Dropdown>
+                  <Dropdown.Toggle
+                    className="btn-outline-quaternary-custom"
+                    variant="btn-outline-quaternary-custom"
+                  >
+                    {name}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu
+                    className="dropdown-menu-custom-2"
+                    variant="dropdown-menu-custom-2"
+                  >
+                    <Dropdown.Item
+                      className="dropdown-item-custom"
+                      variant="dropdown-item-custom"
+                      href="#"
+                    >
+                      Ayarlar
+                    </Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item
+                      className="dropdown-item-custom"
+                      variant="dropdown-item-custom"
+                      href="#"
+                    >
+                      Çıkış Yap
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
             </div>
           </div>
         </div>

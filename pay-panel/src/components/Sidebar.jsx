@@ -18,7 +18,7 @@ function Sidebar() {
         <div id="nav-links" className="navbar-collapse mt-4">
           <ul className="navbar-nav text-center">
             <li className="nav-item">
-              <a href="/Homepage" className="nav-link text-primary">
+              <a href="/Dashboard" className="nav-link text-primary">
                 Dashboard <MdQueryStats size={"24"} />
               </a>
             </li>

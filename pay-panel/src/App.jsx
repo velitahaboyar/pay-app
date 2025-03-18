@@ -2,14 +2,14 @@ import "../src/css/bootstrap5.3.3.css";
 import Header from "./components/Header.jsx";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Sidebar from "./components/Sidebar.jsx";
-import Homepage from "./Homepage.jsx";
+import Dashboard from "./Dashboard.jsx";
 import { useState, useEffect } from "react";
 import Login from "./Login.jsx";
 import Newdata from "./Newdata.jsx";
 
 function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1280);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {
@@ -40,7 +40,7 @@ function App() {
             <div className={`${isMobile ? "col-12" : "col-11"}`}>
               <Routes>
                 <Route path="/" element={<Navigate to="/Newdata" />} />
-                <Route path="/Homepage" element={<Homepage />} />
+                <Route path="/Dashboard" element={<Dashboard />} />
                 <Route path="/Newdata" element={<Newdata />} />
               </Routes>
             </div>
