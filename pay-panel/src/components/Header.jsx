@@ -1,7 +1,7 @@
-// import React, { useEffect } from "react";
-// import { Navigate, useNavigate } from "react-router-dom";
+import { ImExit } from "react-icons/im";
 import { PiHandHeartDuotone } from "react-icons/pi";
 import { Dropdown } from "react-bootstrap";
+
 function Header() {
   const name = localStorage.getItem("userName");
   //   const Navigate = useNavigate();
@@ -34,11 +34,11 @@ function Header() {
               id="user-info-div"
               className="d-flex flex-column justify-content-evenly align-items-start"
             >
-              <span className="text-primary">
+              <span className="text-primary mb-2">
                 Hoşgeldin{" "}
                 <PiHandHeartDuotone className="text-tertiary" size={"20"} />
               </span>
-              <div className="d-flex">
+              <div className="d-flex align-items-center gap-3">
                 <Dropdown>
                   <Dropdown.Toggle
                     className="btn-outline-quaternary-custom"
@@ -67,6 +67,20 @@ function Header() {
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
+                <div className="nav-item">
+                  <a
+                    href="#"
+                    className="nav-link text-primary fw-bold"
+                    id="exit-button"
+                  >
+                    <button
+                      className="btn btn-outline-tertiary"
+                      id="btn-hover-none"
+                    >
+                      Çıkış Yap <ImExit size={"18"}/>
+                    </button>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

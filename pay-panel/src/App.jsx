@@ -7,9 +7,11 @@ import { useState, useEffect } from "react";
 import Login from "./Login.jsx";
 import Newdata from "./Newdata.jsx";
 
+// toastmessage
+
 function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1280);
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -39,7 +41,7 @@ function App() {
             {/* grid ile tüm sayfa görüntüleme*/}
             <div className={`${isMobile ? "col-12" : "col-11"}`}>
               <Routes>
-                <Route path="/" element={<Navigate to="/Newdata" />} />
+                <Route path="/" element={<Login />} />
                 <Route path="/Dashboard" element={<Dashboard />} />
                 <Route path="/Newdata" element={<Newdata />} />
               </Routes>

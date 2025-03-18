@@ -3692,7 +3692,6 @@ fieldset:disabled .btn {
 }
 /* custom dropdown css bitis */
 
-
 .dropdown-menu-custom-2 {
   --bs-dropdown-zindex: 1000;
   --bs-dropdown-min-width: 10rem;
@@ -3737,7 +3736,6 @@ fieldset:disabled .btn {
   border: 1px solid #f0ba0a;
   border-radius: 4px;
 }
-
 
 .dropdown-menu[data-bs-popper] {
   top: 100%;
@@ -9587,7 +9585,7 @@ fieldset:disabled .btn {
 .bg-secondary {
   --bs-bg-opacity: 1;
   /* background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important; */
-  background-color: #232323 !important;
+  background-color: #0d0d0d !important;
 }
 
 .bg-tertiary {

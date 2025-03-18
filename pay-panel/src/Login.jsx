@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { IoIosLogIn } from "react-icons/io";
+import { useNavigate } from "react-router";
 
 function Login({ setIsAuthenticated }) {
   const [name, setName] = useState();
   const [password] = useState();
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     let requestBody = {
@@ -17,7 +19,8 @@ function Login({ setIsAuthenticated }) {
     );
     if (response.data.result == "success") {
       localStorage.setItem("userName", name);
-      return setIsAuthenticated(true);
+      setIsAuthenticated(true);
+      return navigate("/Newdata");
     } else {
       setIsAuthenticated(false);
     }
