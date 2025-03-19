@@ -20,7 +20,7 @@ function Login({ setIsAuthenticated }) {
     if (response.data.result == "success") {
       localStorage.setItem("userName", name);
       setIsAuthenticated(true);
-      return navigate("/Newdata");
+      return navigate("/Dashboard");
     } else {
       setIsAuthenticated(false);
     }

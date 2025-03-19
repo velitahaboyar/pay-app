@@ -1,0 +1,46 @@
+<div className="col col-lg-6">
+        <div className="card bg-secondary p-xl-3 shadow-custom-2 rounded-4">
+          <div className="card-body">
+            <div className="text-primary text-center mb-4">
+              <h3>Komisyonlarım</h3>
+              <div className="d-flex justify-content-center">
+                <hr className="text-tertiary w-50" />
+              </div>
+            </div>
+            <table className="table table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">İsim Soyisim</th>
+                  <th scope="col">Telefon</th>
+                  <th scope="col">Grup</th>
+                  <th scope="col">Yapılan Satış</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Taha Boyar</th>
+                  <td>5324159833</td>
+                  <td>3-4-5 6. Sınıf Matematik Test Kitabı</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td colspan="2">Larry the Bird</td>
+                  <td>@twitter</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div
+              className="d-flex flex-row text-center"
+              id="dropdown div"
+            ></div>
+          </div>
+        </div>
+      </div>

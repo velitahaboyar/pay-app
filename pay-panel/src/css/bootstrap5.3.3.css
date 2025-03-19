@@ -2826,10 +2826,8 @@ textarea.form-control-lg {
   line-height: 1.5;
   color: var(--bs-body-color);
   text-align: center;
-  white-space: nowrap;
   background-color: var(--bs-tertiary-bg);
-  border: var(--bs-border-width) solid var(--bs-border-color);
-  border-radius: var(--bs-border-radius);
+  outline: none !important;
 }
 
 .input-group-lg > .form-control,
@@ -12850,6 +12848,18 @@ fieldset:disabled .btn {
   .d-print-none {
     display: none !important;
   }
+}
+
+/* Chrome, Safari ve Edge için */
+.no-spinner::-webkit-inner-spin-button,
+.no-spinner::-webkit-outer-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0;
+}
+
+/* Firefox için */
+.no-spinner {
+  -moz-appearance: textfield !important;
 }
 
 /*# sourceMappingURL=bootstrap.css.map */
