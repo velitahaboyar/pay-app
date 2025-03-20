@@ -16,8 +16,8 @@ function Header() {
   //   });
 
   return (
-    <nav className="bg-primary navbar w-100 shadow-custom">
-      <div className="container-fluid p-2">
+    <nav className="bg-primary navbar shadow-custom">
+      <div className="container p-2">
         <div className="container d-flex justify-content-between">
           <div id="logo-div">
             <a href="/" className="navbar-brand">
