@@ -22,7 +22,10 @@ const Tables = () => {
             <th>Telefon Numarası</th>
             <th>Ürün Adı</th>
             <th>Satış Adedi</th>
-            <th>Verilecek Komisyon (<FaTurkishLiraSign className="text-tertiary"/>)</th>
+            <th>
+              Verilecek Komisyon (
+              <FaTurkishLiraSign className="text-tertiary" />)
+            </th>
           </tr>
         </thead>
         <tbody className="text-center">
@@ -31,9 +34,10 @@ const Tables = () => {
               <td>{user.personName}</td>
               <td>{user.personTel}</td>
               <td>{user.productName}</td>
-              <td className="text-end">{user.sales}</td>
-              <td className="text-end">
-                {user.commission} <FaTurkishLiraSign className="text-tertiary"/>
+              <td className="text-end fw-bold">{user.sales}</td>
+              <td className="text-end fw-bold">
+                {user.commission}{" "}
+                <FaTurkishLiraSign className="text-tertiary" />
               </td>
             </tr>
           ))}

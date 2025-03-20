@@ -4,100 +4,243 @@ import toast, { Toaster } from "react-hot-toast";
 import { VscPercentage } from "react-icons/vsc";
 import axios from "axios";
 
+function addSale() {
+  var sales = parseInt(document.getElementById("salesAmount").value); // Satış adedini al
+  var comGroupData = localStorage.getItem("comGroup"); // Komisyon grubu verilerini localStorage'dan al
+  var selectedComGroup = document.getElementById("selectComGroup").value; // Seçilen komisyon grubunu al
+  var selectedUser = document.getElementById("selectComPerson").value; // Seçilen kullanıcıyı al
+
+  // Eğer komisyon grubu verisi varsa
+  if (comGroupData) {
+    var comGroup = JSON.parse(comGroupData); // JSON parse et
+
+    // Seçilen komisyon grubuna ait ürünü bul
+    var selectedProduct = comGroup.find(
+      (product) =>
+        `${product.productName} | ${product.productPrice} TL | ${product.comPercentage}%` ===
+        selectedComGroup
+    );
+
+    if (selectedProduct) {
+      var productPrice = selectedProduct.productPrice; // Ürün fiyatını al
+      var comPercentage = selectedProduct.comPercentage; // Komisyon yüzdesini al
+      var totalSalesAmount = sales * productPrice; // Satış adediyle fiyatı çarp
+      var commission = (totalSalesAmount * comPercentage) / 100; // Verilen komisyonu hesapla
+      var profit = totalSalesAmount - commission; // Kârı hesapla
+      var productName = selectedProduct.productName; // Ürün ismini al
+
+      console.log("Toplam Satış Tutarı: ", totalSalesAmount);
+      console.log("Komisyon Tutarı: ", commission);
+      console.log("Kâr: ", profit);
+
+      // Kullanıcıya özel bilgileri localStorage'a kaydet
+      var userSalesData = localStorage.getItem("userSalesData");
+      var userSalesArray = userSalesData ? JSON.parse(userSalesData) : [];
+
+      // Kullanıcıyı bul ya da yeni bir kullanıcı verisi oluştur
+      var selectedUserData = userSalesArray.find(
+        (user) => user.personTel === selectedUser.split(" | ")[1] // Telefon numarasına göre eşleştir
+      );
+
+      if (selectedUserData) {
+        // Kullanıcı varsa, satış bilgilerini güncelle
+        selectedUserData.sales += sales; // Adet olarak satışları güncelle
+        selectedUserData.totalSales += sales; // Toplam satış adedini güncelle
+        selectedUserData.commission += commission;
+        selectedUserData.profit += profit;
+        selectedUserData.productName = productName; // Ürün ismini de güncelle
+      } else {
+        // Kullanıcı yoksa, yeni kullanıcı verisi ekle
+        userSalesArray.push({
+          personTel: selectedUser.split(" | ")[1],
+          personName: selectedUser.split(" | ")[0],
+          sales: sales, // Satış adedi
+          totalSales: sales, // Toplam satış adedi
+          commission: commission,
+          profit: profit,
+          productName: productName, // Ürün ismini kaydet
+        });
+      }
+
+      // Veriyi tekrar localStorage'a kaydet
+      localStorage.setItem("userSalesData", JSON.stringify(userSalesArray));
+
+      // Toplam satış adedini localStorage'a kaydet
+      var previousTotalSales =
+        parseInt(localStorage.getItem("totalSales")) || 0;
+      var newTotalSales = previousTotalSales + sales; // Yeni toplam satış adedi
+      localStorage.setItem("totalSales", newTotalSales.toString()); // Yeni toplam satış adedini kaydet
+
+      // Dashboard'ı güncellemek için gerekli bilgileri state'e aktar
+      // Burada, dashboard bileşenini güncelleyen bir fonksiyon çağırabilirsin
+    } else {
+      console.log("Seçilen ürün bulunamadı.");
+    }
+  } else {
+    console.log("Komisyon grubu verisi bulunamadı.");
+  }
+}
+
 function Newdata() {
   const notify = () => toast("Deneme");
 
-  // kullanıcı bilgileri GET islemi baslangici
+  // Kullanıcı bilgileri GET işlemi başlangıcı
   const [userInfo, setUserInfo] = useState([]);
+
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
         const response = await axios.get(
           "https://private-3cb5f3-adduser15.apiary-mock.com/getUserInfo"
         );
-        setUserInfo(response.data.UserList);
+
+        let apiData = response.data.UserList || []; // API'den gelen kullanıcılar
+        let localData = localStorage.getItem("userInfo"); // localStorage'daki kullanıcılar
+
+        let storedData = localData ? JSON.parse(localData) : []; // JSON parse işlemi
+        if (!Array.isArray(storedData)) {
+          storedData = [storedData]; // Eğer tek obje varsa diziye çevir
+        }
+
+        // **API verileri zaten localStorage içinde var mı kontrol et**
+        let newData = apiData.filter(
+          (apiItem) =>
+            !storedData.some(
+              (storedItem) => storedItem.personTel === apiItem.personTel
+            ) // Telefon numarasına göre kıyasla
+        );
+
+        let mergedData = [...storedData, ...newData]; // Yeni verileri ekleyerek birleştir
+
+        setUserInfo(mergedData); // State'i güncelle
+
+        // localStorage'ı sadece yeni veri varsa güncelle
+        if (newData.length > 0) {
+          localStorage.setItem("userInfo", JSON.stringify(mergedData));
+        }
       } catch (error) {
-        alert("basarisiz ustaa..");
+        alert("başarısız ustaa..");
       }
     };
+
     fetchUserInfo();
   }, []);
 
-  // kullanıcı bilgileri GET islemi sonu
+  // Kullanıcı bilgileri GET işlemi sonu
 
-  // kullanıcı bilgileri POST islemi baslangici
-
-  const [personName, setPersonName] = useState();
-  const [personTel, setPersonTel] = useState();
+  // Kullanıcı bilgileri POST işlemi başlangıcı
+  const [personName, setPersonName] = useState("");
+  const [personTel, setPersonTel] = useState("");
 
   const postUserInfo = async () => {
-    let userInfo = {
+    let newUser = {
       personName: personName,
       personTel: personTel,
     };
 
     const responseUser = await axios.post(
       "https://private-3cb5f3-adduser15.apiary-mock.com/postUserInfo",
-      userInfo
+      newUser
     );
 
     if (responseUser.data.Result == "success") {
-      localStorage.setItem("userInfo", JSON.stringify(userInfo));
-      return console.log(userInfo);
+      let localData = localStorage.getItem("userInfo");
+      let userArray = localData ? JSON.parse(localData) : [];
+
+      if (!Array.isArray(userArray)) {
+        userArray = [userArray]; // Eğer tek obje varsa diziye çeviriyoruz
+      }
+
+      userArray.push(newUser); // Yeni kullanıcıyı ekle
+      localStorage.setItem("userInfo", JSON.stringify(userArray)); // Güncellenmiş listeyi kaydet
+
+      setUserInfo([...userInfo, newUser]); // Yeni kullanıcıyı state'e de ekle
     } else {
-      alert("basarisiz...");
+      alert("Başarısız...");
     }
   };
-
-  // kullanıcı bilgileri POST islemi sonu
+  // Kullanıcı bilgileri POST işlemi sonu
 
   // komisyon grubu GET islemi baslangici
+  // komisyon grubu POST islemi baslangic
 
   const [productGroup, setProductGroup] = useState([]);
+  const [productPrice, setProductPrice] = useState("");
+  const [comPercentage, setComPercentage] = useState("");
+  const [productName, setProductName] = useState("");
+
   useEffect(() => {
     const fetchProductGroup = async () => {
       try {
         const response = await axios.get(
           "https://private-152a7f-comgroup.apiary-mock.com/GetProductGroup"
         );
-        setProductGroup(response.data.ProductGroup);
-        console.log(response.data.ProductGroup);
+
+        let apiData = response.data.ProductGroup || []; // API'den gelen veriler
+        let localData = localStorage.getItem("comGroup"); // localStorage verileri
+
+        let storedData = localData ? JSON.parse(localData) : []; // localStorage JSON parse
+        if (!Array.isArray(storedData)) {
+          storedData = [storedData]; // Eğer tek obje varsa diziye çevir
+        }
+
+        // **API verileri zaten localStorage içinde var mı kontrol et**
+        let newData = apiData.filter(
+          (apiItem) =>
+            !storedData.some(
+              (storedItem) => storedItem.productName === apiItem.productName
+            )
+        );
+
+        let mergedData = [...storedData, ...newData]; // Yeni verileri ekleyerek birleştir
+
+        setProductGroup(mergedData); // State'i güncelle
+
+        // localStorage'ı sadece yeni veri varsa güncelle
+        if (newData.length > 0) {
+          localStorage.setItem("comGroup", JSON.stringify(mergedData));
+        }
       } catch (error) {
-        alert("basarisiz ustaa..");
+        alert("başarısız ustaa..");
       }
     };
+
     fetchProductGroup();
   }, []);
 
-  // komisyon grubu GET islemi sonu
-
-  const [productName, setProductName] = useState();
-  const [productPrice, setProductPrice] = useState();
-  const [comPercentage, setComPercentage] = useState();
-
-  // komisyon grubu POST islemi baslangici
-
   const postComGroup = async () => {
-    let comGroup = {
+    let newComGroup = {
       productName: productName,
       productPrice: productPrice,
       comPercentage: comPercentage,
     };
 
+    // Yeni ürün grubunu API'ye POST isteği ile gönderiyoruz
     const response = await axios.post(
       "https://private-152a7f-comgroup.apiary-mock.com/PostProductGroup",
-      comGroup
+      newComGroup
     );
 
     if (response.data.Result == "success") {
-      localStorage.setItem("comGroup", JSON.stringify(comGroup));
-      return console.log(comGroup);
+      // localStorage'daki mevcut veriyi alıyoruz
+      let localData = localStorage.getItem("comGroup");
+      let comGroupArray = localData ? JSON.parse(localData) : [];
+
+      if (!Array.isArray(comGroupArray)) {
+        comGroupArray = [comGroupArray]; // Eğer tek obje varsa diziye çeviriyoruz
+      }
+
+      comGroupArray.push(newComGroup); // Yeni ürünü diziye ekliyoruz
+      localStorage.setItem("comGroup", JSON.stringify(comGroupArray)); // Güncellenmiş listeyi localStorage'a kaydediyoruz
+
+      setProductGroup([...productGroup, newComGroup]); // Yeni eklenen ürünü state'e de ekliyoruz
     } else {
-      alert("basarisiz");
+      alert("Başarısız");
     }
   };
 
   // komisyon grubu POST islemi sonu
+  // komisyon grubu GET islemi sonu
 
   return (
     <div className="container my-5 d-flex gap-5 justify-content-center">
@@ -316,7 +459,7 @@ function Newdata() {
                     </option>
                     {productGroup.map((item, index) => (
                       <option key={index}>
-                        {item.productName} | {item.productPrice}TL |{" "}
+                        {item.productName} | {item.productPrice} TL |{" "}
                         {item.comPercentage}%
                       </option>
                     ))}
@@ -331,13 +474,18 @@ function Newdata() {
                   <div className="d-flex align-items-center justify-content-between">
                     <input
                       type="number"
+                      name="salesAmount"
+                      id="salesAmount"
                       className="form-control w-25"
                       min={1}
                       max={50}
                       maxLength={2}
                       autoComplete="off"
                     />
-                    <button className="btn btn-outline-quaternary w-50 text-tertiary">
+                    <button
+                      className="btn btn-outline-quaternary w-50 text-tertiary"
+                      onClick={addSale}
+                    >
                       Ekle
                     </button>
                   </div>

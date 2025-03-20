@@ -6,6 +6,7 @@ import Dashboard from "./Dashboard.jsx";
 import { useState, useEffect } from "react";
 import Login from "./Login.jsx";
 import Newdata from "./Newdata.jsx";
+import Tables from "./Tables.jsx";
 
 // toastmessage
 
@@ -44,6 +45,7 @@ function App() {
                 <Route path="/" element={<Login />} />
                 <Route path="/Dashboard" element={<Dashboard />} />
                 <Route path="/Newdata" element={<Newdata />} />
+                <Route path="/Tables" element={<Tables />} />
               </Routes>
             </div>
           </div>
