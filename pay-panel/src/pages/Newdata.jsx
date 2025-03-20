@@ -6,6 +6,12 @@ import { addSale } from "../js/addSale";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+//input'a virgül eklenmiyor düzelt
+//local'e noktadan öncesi parasal olarak ekleniyor
+//isim kısmına sayısal değer kabul edilmeyecek
+//inputların max min length'i kontrol edilecek ve notify bastırılacak.
+//toplam satış ikonunu değiştir.
+
 function Newdata() {
   // Sayıyı binlik ayracıyla formatlayan fonksiyon
   const formatNumber = (value) => {
@@ -342,6 +348,7 @@ function Newdata() {
                           type="text"
                           className="form-control"
                           maxLength={"30"}
+                          minLength={"3"}
                           required
                           autoComplete="off"
                           value={personName} // Değeri state ile bağladım

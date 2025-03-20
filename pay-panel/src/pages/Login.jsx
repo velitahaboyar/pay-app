@@ -10,7 +10,7 @@ function Login() {
   const [password] = useState("");
   const navigate = useNavigate();
 
-  // Notify fonksiyonları
+  // notify fonksiyonları (pop-up bildirimler)
   const notifyWarn = (message) => {
     toast.warn(message, {
       position: "top-right",
@@ -47,7 +47,7 @@ function Login() {
       service_val_name: name,
       service_val_password: password,
     };
-
+	
     try {
       const response = await axios.post(
         "https://www.mockachino.com/1b9b9eca-13b9-41/login",
@@ -55,12 +55,12 @@ function Login() {
       );
       console.log("API Yanıtı:", response.data);
 
-      if (response.data.result === "success") {
+      if (response.data.result == "success") {
         localStorage.setItem("userName", name);
 
         toast.success("Giriş başarılı, Yönlendiriliyorsunuz!", {
           position: "top-right",
-          autoClose: 2000, 
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: false,
@@ -68,10 +68,10 @@ function Login() {
           theme: "dark",
         });
 
-        // Notify göründükten sonra yönlendirme için gecikme
+        // notify  için gecikme
         setTimeout(() => {
           navigate("/App/Dashboard");
-        }, 2200); 
+        }, 2200);
       } else {
         navigate("/");
       }
