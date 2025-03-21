@@ -19,9 +19,9 @@ import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 
 const Dashboard = () => {
   // 1. State Tanımlamaları
-  const [totalSales, setTotalSales] = useState(0); // Toplam satış adedi
-  const [totalProfit, setTotalProfit] = useState(0); // Komisyonlu kazanç (net kazanç)
-  const [totalCommission, setTotalCommission] = useState(0); // Ödenen komisyon
+  const [totalSales, setTotalSales] = useState(0);
+  const [totalProfit, setTotalProfit] = useState(0); 
+  const [totalCommission, setTotalCommission] = useState(0); 
 
   // 2. Yardımcı Fonksiyonlar
   const formatCurrency = (value) => {

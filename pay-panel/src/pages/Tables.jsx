@@ -244,7 +244,6 @@ const Tables = () => {
                                 })}{" "}
                                 TL
                               </td>{" "}
-                              {/* Binlik ayracı ve virgül */}
                             </tr>
                           )) || []
                       )
