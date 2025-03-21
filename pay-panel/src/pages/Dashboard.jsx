@@ -47,7 +47,7 @@ const Dashboard = () => {
       <div className="d-flex container-fluid justify-content-center w-100">
         <div className="row w-100 justify-content-center align-items-center">
           <div className=" ">
-            <div className="card d-flex p-sm-4 p-4 p-xl-2 p-xxl-2 bg-primary rounded-4 border-tertiary">
+            <div className="card d-flex p-sm-4 p-4 p-xl-2 p-xxl-4 bg-primary rounded-4 border-tertiary">
               <div className="card-body shadow-custom rounded-4 p-sm-3 p-xl-4 p-md-3 p-lg-3">
                 <h2 className="card-title text-primary text-center">
                   <span className="text-tertiary fw-bold">PAY</span>'a
@@ -86,9 +86,9 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="d-flex container-fluid justify-content-center">
-        <div className="row container-fluid w-100 justify-content-center align-items-center">
-          <div className="card d-flex p-sm-4 p-4 p-xl-2 p-xxl-2 justify-content-center bg-primary rounded-4 border-tertiary">
+      <div className="d-flex container-fluid justify-content-center w-100">
+        <div className="container-fluid justify-content-center align-items-center">
+          <div className="card d-flex p-sm-4 p-4 p-xl-3 p-xxl-4 justify-content-center bg-primary rounded-4 border-tertiary">
             <div className="container-fluid">
               <div className="card bg-primary rounded-4 shadow-custom">
                 <div className="card-body bg-primary">
