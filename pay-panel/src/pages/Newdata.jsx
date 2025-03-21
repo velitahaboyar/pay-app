@@ -1,3 +1,15 @@
+/* 
+Önbilgi:
+1- Import'lar: En üstte,
+2- State'ler: Hepsini bir arada topladım.
+3- Yardımcı Fonksiyonlar: formatNumber, isValidName ve notify* fonksiyonları bir grupta, çünkü bunlar genel amaçlı yardımcılar.
+4- API İşlemleri: postUserInfo, postComGroup ve handleAddSale gibi asenkron işlemleri bir araya getirdim, çünkü bunlar dış dünyayla iletişim kuruyor.
+5- Event Handler'lar: handle*Change fonksiyonlarını ayrı bir grup yaptım, çünkü bunlar UI etkileşimlerini yönetiyor.
+6- useEffect'ler: Veri çekme işlemleri yan etkiler olarak bir arada, sırayla okunması kolay.
+7- Render: En altta, çünkü bu kısım UI'yi oluşturuyor ve diğer her şey buna hizmet ediyor.
+Bu düzen, kodu inceleyen birinin önce "Neler tanımlı?", sonra "Hangi araçlar var?", ardından "Veri nasıl işleniyor?" ve en son "UI nasıl görünüyor?" diye adım adım takip etmesini sağlar. 
+*/
+
 import React, { useEffect, useState } from "react";
 import CustomDropdown from "../components/CustomDropdown";
 import { VscPercentage } from "react-icons/vsc";
@@ -6,24 +18,34 @@ import { addSale } from "../js/addSale";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-//input'a virgül eklenmiyor düzelt
-//local'e noktadan öncesi parasal olarak ekleniyor
-//isim kısmına sayısal değer kabul edilmeyecek
-//inputların max min length'i kontrol edilecek ve notify bastırılacak.
-//toplam satış ikonunu değiştir.
-
 function Newdata() {
-  // Sayıyı binlik ayracıyla formatlayan fonksiyon
+  // 1. State Tanımlamaları
+  const [userInfo, setUserInfo] = useState([]);
+  const [personName, setPersonName] = useState("");
+  const [personTel, setPersonTel] = useState("");
+  const [comPercentage, setComPercentage] = useState("");
+  const [productPrice, setProductPrice] = useState("");
+  const [productGroup, setProductGroup] = useState([]);
+  const [productName, setProductName] = useState("");
+  const [salesAmount, setSalesAmount] = useState("");
+  const [selectedPerson, setSelectedPerson] = useState("");
+  const [selectedGroup, setSelectedGroup] = useState("");
+
+  // 2. Yardımcı Fonksiyonlar
+  const handleSalesAmountChange = (e) => {
+    const value = e.target.value;
+    if (/^\d*$/.test(value) && value.length <= 2) {
+      setSalesAmount(value);
+    }
+  };
+
   const formatNumber = (value) => {
     const numericValue = value.replace(/[^\d]/g, "");
     return numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
 
-  // Ürün fiyatı inputu için onChange handler
-  const handleProductPriceChange = (e) => {
-    const rawValue = e.target.value; // Kullanıcının yazdığı ham değer
-    const formattedValue = formatNumber(rawValue); // Formatlanmış hali
-    setProductPrice(formattedValue);
+  const isValidName = (name) => {
+    return /^[a-zA-ZğüşöçİĞÜŞÖÇ\s]+$/.test(name);
   };
 
   const notifyWarn = (message) => {
@@ -38,6 +60,7 @@ function Newdata() {
       theme: "dark",
     });
   };
+
   const notifySuccess = (message) => {
     toast.success(message, {
       position: "top-right",
@@ -50,6 +73,7 @@ function Newdata() {
       theme: "dark",
     });
   };
+
   const notifyError = (message) => {
     toast.error(message, {
       position: "top-right",
@@ -63,44 +87,20 @@ function Newdata() {
     });
   };
 
-  // Kullanıcı bilgileri GET işlemi
-  const [userInfo, setUserInfo] = useState([]);
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      try {
-        const response = await axios.get(
-          "https://private-3cb5f3-adduser15.apiary-mock.com/getUserInfo"
-        );
-        let apiData = response.data.UserList || [];
-        let localData = localStorage.getItem("userInfo");
-        let storedData = localData ? JSON.parse(localData) : [];
-        if (!Array.isArray(storedData)) storedData = [storedData];
-
-        let newData = apiData.filter(
-          (apiItem) =>
-            !storedData.some(
-              (storedItem) => storedItem.personTel === apiItem.personTel
-            )
-        );
-        let mergedData = [...storedData, ...newData];
-        setUserInfo(mergedData);
-        if (newData.length > 0) {
-          localStorage.setItem("userInfo", JSON.stringify(mergedData));
-        }
-      } catch {
-        notifyError("Kullanıcı bilgileri alınamadı!");
-      }
-    };
-    fetchUserInfo();
-  }, []);
-
-  // Kullanıcı bilgileri POST işlemi
-  const [personName, setPersonName] = useState("");
-  const [personTel, setPersonTel] = useState("");
-
+  // 3. API İşlemleri (GET & POST)
   const postUserInfo = async () => {
-    if (!personName || !personTel) {
+    if (
+      !personName ||
+      !personTel ||
+      personName.length < 3 ||
+      personTel.length < 10
+    ) {
       notifyWarn("Satıcı İsmi ve Telefon Numarası zorunludur!");
+      return;
+    }
+
+    if (!isValidName(personName)) {
+      notifyWarn("Satıcı ismi sadece harf ve boşluk içerebilir!");
       return;
     }
 
@@ -118,7 +118,7 @@ function Newdata() {
         userArray.push(newUser);
         localStorage.setItem("userInfo", JSON.stringify(userArray));
         setUserInfo([...userInfo, newUser]);
-        setPersonName(""); // Formu sıfırla
+        setPersonName("");
         setPersonTel("");
         notifySuccess("Kullanıcı başarıyla eklendi!");
       } else {
@@ -128,41 +128,6 @@ function Newdata() {
       notifyError("Bir hata oluştu!");
     }
   };
-
-  // Komisyon grubu GET & POST işlemi
-  const [productGroup, setProductGroup] = useState([]);
-  const [productPrice, setProductPrice] = useState("");
-  const [comPercentage, setComPercentage] = useState("");
-  const [productName, setProductName] = useState("");
-
-  useEffect(() => {
-    const fetchProductGroup = async () => {
-      try {
-        const response = await axios.get(
-          "https://private-152a7f-comgroup.apiary-mock.com/GetProductGroup"
-        );
-        let apiData = response.data.ProductGroup || [];
-        let localData = localStorage.getItem("comGroup");
-        let storedData = localData ? JSON.parse(localData) : [];
-        if (!Array.isArray(storedData)) storedData = [storedData];
-
-        let newData = apiData.filter(
-          (apiItem) =>
-            !storedData.some(
-              (storedItem) => storedItem.productName === apiItem.productName
-            )
-        );
-        let mergedData = [...storedData, ...newData];
-        setProductGroup(mergedData);
-        if (newData.length > 0) {
-          localStorage.setItem("comGroup", JSON.stringify(mergedData));
-        }
-      } catch {
-        notifyError("Komisyon grubu alınamadı!");
-      }
-    };
-    fetchProductGroup();
-  }, []);
 
   const postComGroup = async () => {
     if (!productName || !productPrice || !comPercentage) {
@@ -196,10 +161,6 @@ function Newdata() {
     }
   };
 
-  const [salesAmount, setSalesAmount] = useState("");
-  const [selectedPerson, setSelectedPerson] = useState("");
-  const [selectedGroup, setSelectedGroup] = useState("");
-
   const handleAddSale = async () => {
     if (!selectedPerson || !selectedGroup || !salesAmount) {
       notifyWarn("Satış Yapan Kişi, Komisyon Grubu ve Satış Adedi zorunludur!");
@@ -209,23 +170,116 @@ function Newdata() {
     try {
       const saleData = {
         personTel: selectedPerson.split("|")[1].trim(),
+        personName: selectedPerson.split("|")[0].trim(), // personName eklendi
         productName: selectedGroup.split("|")[0].trim(),
-        salesAmount: parseInt(salesAmount),
+        salesAmount,
       };
+
+      console.log("Gönderilen saleData:", saleData); // Hata ayıklamak için
+
       const result = await addSale(saleData);
+      console.log("addSale sonucu:", result); // Hata ayıklamak için
+
       if (result.success) {
         notifySuccess("Satış başarıyla eklendi!");
         setSalesAmount("");
         setSelectedPerson("");
         setSelectedGroup("");
       } else {
-        notifyError("Satış eklenemedi!");
+        notifyError(result.message || "Satış eklenemedi!");
       }
-    } catch {
+    } catch (error) {
+      console.error("Hata:", error);
       notifyError("Bir hata oluştu!");
     }
   };
 
+  // 4. Event Handler'lar
+  const handleComPercentageChange = (e) => {
+    const value = e.target.value;
+    const maxLength = 3;
+
+    if (value.length <= maxLength && /^\d*$/.test(value)) {
+      const numValue = parseInt(value, 10) || "";
+      if (numValue === "" || (numValue >= 1 && numValue <= 100)) {
+        setComPercentage(value);
+      }
+    }
+  };
+
+  const handleProductPriceChange = (e) => {
+    const rawValue = e.target.value;
+    const formattedValue = formatNumber(rawValue);
+    setProductPrice(formattedValue);
+  };
+
+  const handleNameChange = (e) => {
+    const value = e.target.value;
+    if (value === "" || isValidName(value)) {
+      setPersonName(value);
+    }
+  };
+
+  // 5. useEffect (Yan Etkiler)
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get(
+          "https://private-3cb5f3-adduser15.apiary-mock.com/getUserInfo"
+        );
+        let apiData = response.data.UserList || [];
+        let localData = localStorage.getItem("userInfo");
+        let storedData = localData ? JSON.parse(localData) : [];
+        if (!Array.isArray(storedData)) storedData = [storedData];
+
+        let newData = apiData.filter(
+          (apiItem) =>
+            !storedData.some(
+              (storedItem) => storedItem.personTel === apiItem.personTel
+            )
+        );
+        let mergedData = [...storedData, ...newData];
+        setUserInfo(mergedData);
+        if (newData.length > 0) {
+          localStorage.setItem("userInfo", JSON.stringify(mergedData));
+        }
+      } catch {
+        notifyError("Kullanıcı bilgileri alınamadı!");
+      }
+    };
+    fetchUserInfo();
+  }, []);
+
+  useEffect(() => {
+    const fetchProductGroup = async () => {
+      try {
+        const response = await axios.get(
+          "https://private-152a7f-comgroup.apiary-mock.com/GetProductGroup"
+        );
+        let apiData = response.data.ProductGroup || [];
+        let localData = localStorage.getItem("comGroup");
+        let storedData = localData ? JSON.parse(localData) : [];
+        if (!Array.isArray(storedData)) storedData = [storedData];
+
+        let newData = apiData.filter(
+          (apiItem) =>
+            !storedData.some(
+              (storedItem) => storedItem.productName === apiItem.productName
+            )
+        );
+        let mergedData = [...storedData, ...newData];
+        setProductGroup(mergedData);
+        if (newData.length > 0) {
+          localStorage.setItem("comGroup", JSON.stringify(mergedData));
+        }
+      } catch {
+        notifyError("Komisyon grubu alınamadı!");
+      }
+    };
+    fetchProductGroup();
+  }, []);
+
+  // 6. Render
   return (
     <div className="container my-3 flex-column d-flex gap-5 justify-content-center">
       <div className="flex-sm-column">
@@ -239,7 +293,7 @@ function Newdata() {
             </div>
             <ToastContainer />
             <div className="flex-xs-column text-center" id="dropdown div">
-              <div className="col-6 p-md-5 p-2 p-lg-2 mb-5 w-100">
+              <div className="col-6 p-md-3 p-2 p-lg-2 mb-5 w-100">
                 <CustomDropdown
                   title="Yeni Komisyon Grubu"
                   onClick={(e) => e.stopPropagation()}
@@ -261,7 +315,7 @@ function Newdata() {
                           maxLength={"100"}
                           required
                           autoComplete="off"
-                          value={productName} // Değeri state ile bağladım
+                          value={productName}
                           onChange={(e) => setProductName(e.target.value)}
                         />
                       </div>
@@ -288,7 +342,7 @@ function Newdata() {
                         <label htmlFor="" className="form-label">
                           Komisyon Yüzdesi:
                         </label>
-                        <div className="d-flex aling-items-center justify-content-between">
+                        <div className="d-flex align-items-center justify-content-between">
                           <div className="input-group w-25 form-outline">
                             <input
                               id="comPercentage"
@@ -304,8 +358,8 @@ function Newdata() {
                                 MozAppearance: "textfield",
                                 WebkitAppearance: "none",
                               }}
-                              value={comPercentage} // Değeri state ile bağladım
-                              onChange={(e) => setComPercentage(e.target.value)}
+                              value={comPercentage}
+                              onInput={handleComPercentageChange}
                             />
                             <VscPercentage
                               className="align-self-center mx-1"
@@ -314,7 +368,7 @@ function Newdata() {
                           </div>
                           <button
                             onClick={(e) => {
-                              e.preventDefault(); // Formun submit olmasını engelle
+                              e.preventDefault();
                               postComGroup();
                             }}
                             className="btn btn-outline-quaternary-custom"
@@ -347,12 +401,12 @@ function Newdata() {
                           name="personName"
                           type="text"
                           className="form-control"
-                          maxLength={"30"}
+                          maxLength={"40"}
                           minLength={"3"}
                           required
                           autoComplete="off"
-                          value={personName} // Değeri state ile bağladım
-                          onChange={(e) => setPersonName(e.target.value)}
+                          value={personName}
+                          onChange={handleNameChange}
                         />
                       </div>
                       <div id="priceDiv" className="mb-3">
@@ -368,7 +422,7 @@ function Newdata() {
                           maxLength={10}
                           required
                           autoComplete="off"
-                          value={personTel} // Değeri state ile bağladım
+                          value={personTel}
                           onChange={(e) => setPersonTel(e.target.value)}
                         />
                         <sub className="text-tertiary">
@@ -380,7 +434,7 @@ function Newdata() {
                           className="btn btn-outline-quaternary-custom"
                           type="button"
                           onClick={(e) => {
-                            e.preventDefault(); // Formun submit olmasını engelle
+                            e.preventDefault();
                             postUserInfo();
                           }}
                         >
@@ -482,11 +536,10 @@ function Newdata() {
                           className="form-control w-25"
                           min={1}
                           max={50}
-                          maxLength={2}
                           autoComplete="off"
                           required
                           value={salesAmount}
-                          onChange={(e) => setSalesAmount(e.target.value)}
+                          onChange={handleSalesAmountChange}
                         />
                         <button
                           className="btn btn-outline-quaternary-custom w-25 text-tertiary"

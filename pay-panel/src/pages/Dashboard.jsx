@@ -1,3 +1,12 @@
+/* 
+Önbilgi:
+1- Import'lar: En üstte, tüm ikonlar ve bağımlılıklar bir arada.
+2- State'ler: totalSales, totalProfit, ve totalCommission başa toplandı.
+3- Yardımcı Fonksiyonlar: formatCurrency burada tek yardımcı fonksiyon.
+4- useEffect: Veri çekme ve hesaplama kısmı, yan etkiler.
+5- Render: En altta, UI oluşturma kısmı net bir şekilde ayrıldı.
+*/
+
 import React, { useState, useEffect } from "react";
 import { HiOutlineRocketLaunch } from "react-icons/hi2";
 import { PiHandHeartDuotone } from "react-icons/pi";
@@ -6,13 +15,15 @@ import { GiPayMoney } from "react-icons/gi";
 import { FcSalesPerformance } from "react-icons/fc";
 import { FaTurkishLiraSign } from "react-icons/fa6";
 import { FaChartLine } from "react-icons/fa";
+import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 
 const Dashboard = () => {
-  const [totalSales, setTotalSales] = useState(0); // toplam satış adedi
-  const [totalProfit, setTotalProfit] = useState(0); // komisyonlu kazanç (net kazanç)
-  const [totalCommission, setTotalCommission] = useState(0); // ödenen komisyon
+  // 1. State Tanımlamaları
+  const [totalSales, setTotalSales] = useState(0); // Toplam satış adedi
+  const [totalProfit, setTotalProfit] = useState(0); // Komisyonlu kazanç (net kazanç)
+  const [totalCommission, setTotalCommission] = useState(0); // Ödenen komisyon
 
-  // parasal değerleri formatlayan fonksiyon
+  // 2. Yardımcı Fonksiyonlar
   const formatCurrency = (value) => {
     const numericValue = Number(value).toFixed(2); // 2 ondalık basamak
     const [integerPart, decimalPart] = numericValue.split(".");
@@ -20,7 +31,7 @@ const Dashboard = () => {
     return `${formattedInteger},${decimalPart}`;
   };
 
-  // localStorage'dan verileri al
+  // 3. useEffect (Yan Etkiler)
   useEffect(() => {
     const userSalesData = localStorage.getItem("userSalesData");
     if (userSalesData) {
@@ -29,11 +40,12 @@ const Dashboard = () => {
       let totalProfitAmount = 0;
       let totalCommissionAmount = 0;
 
-      // Her bir kullanıcı için toplamları hesapla
       salesArray.forEach((user) => {
-        totalSalesAmount += user.totalSales; // satış adedi
-        totalProfitAmount += user.profit; // net kazanç (komisyonlu kazanç)
-        totalCommissionAmount += user.commission; // komisyon
+        user.salesRecords.forEach((record) => {
+          totalSalesAmount += record.sales;
+          totalProfitAmount += record.profit;
+          totalCommissionAmount += record.commission;
+        });
       });
 
       setTotalSales(totalSalesAmount);
@@ -42,13 +54,14 @@ const Dashboard = () => {
     }
   }, []);
 
+  // 4. Render
   return (
     <div className="container-fluid d-flex align-items-center justify-content-center gap-4 flex-column my-3">
       <div className="d-flex container-fluid justify-content-center w-100">
         <div className="row w-100 justify-content-center align-items-center">
-          <div className=" ">
-            <div className="card d-flex p-sm-4 p-4 p-xl-2 p-xxl-4 bg-primary rounded-4 border-tertiary">
-              <div className="card-body shadow-custom rounded-4 p-sm-3 p-xl-4 p-md-3 p-lg-3">
+          <div className="">
+            <div className="card d-flex p-sm-4 p-4 p-xl-3 p-xxl-4 justify-content-center bg-primary rounded-4 border-tertiary">
+              <div className="card-body container-fluid shadow-custom rounded-4 p-sm-3 p-xl-4 p-md-3 p-lg-3">
                 <h2 className="card-title text-primary text-center">
                   <span className="text-tertiary fw-bold">PAY</span>'a
                   Hoşgeldiniz <PiHandHeartDuotone className="text-tertiary" />
@@ -91,7 +104,7 @@ const Dashboard = () => {
           <div className="card d-flex p-sm-4 p-4 p-xl-3 p-xxl-4 justify-content-center bg-primary rounded-4 border-tertiary">
             <div className="container-fluid">
               <div className="card bg-primary rounded-4 shadow-custom">
-                <div className="card-body bg-primary">
+                <div className="card-body container-fluid p-sm-3 p-xl-4 p-md-3 p-lg-3">
                   <div className="d-flex align-items-center flex-column justify-content-center">
                     <h3 className="card-title text-primary fw-bold">
                       Komisyonlarım
@@ -101,7 +114,7 @@ const Dashboard = () => {
                   <div className="container text-primary d-flex align-items-center justify-content-between">
                     <div>
                       <h4 className="fw-bold">
-                        <FcSalesPerformance
+                        <MdOutlineProductionQuantityLimits
                           className="text-tertiary me-2"
                           size={"22"}
                         />
@@ -120,7 +133,7 @@ const Dashboard = () => {
                   <div className="container text-primary d-flex align-items-center justify-content-between">
                     <div>
                       <h4 className="fw-bold">
-                        <GiReceiveMoney
+                        <FcSalesPerformance
                           className="text-tertiary me-2"
                           size={"22"}
                         />
@@ -142,8 +155,7 @@ const Dashboard = () => {
                       Toplam Komisyon Maliyeti :
                     </h4>
                     <div className="d-flex align-items-center">
-                      <h3>{formatCurrency(totalCommission)}</h3>{" "}
-                      {/* Parasal, formatlandı */}
+                      <h3>{formatCurrency(totalCommission)}</h3>
                       <FaTurkishLiraSign
                         size={"20"}
                         className="text-tertiary mb-2 ms-1"
@@ -162,7 +174,7 @@ const Dashboard = () => {
                       </h4>
                     </div>
                     <div className="d-flex align-items-center">
-                      <h3>{formatCurrency(totalProfit - totalCommission)}</h3>{" "}
+                      <h3>{formatCurrency(totalProfit - totalCommission)}</h3>
                       <FaTurkishLiraSign
                         size={"20"}
                         className="text-tertiary mb-2 ms-1"

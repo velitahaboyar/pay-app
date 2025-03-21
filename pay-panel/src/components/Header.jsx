@@ -4,17 +4,6 @@ import { Dropdown } from "react-bootstrap";
 
 function Header() {
   const name = localStorage.getItem("userName");
-  //   const Navigate = useNavigate();
-
-  //   useEffect(() => {
-  //     if (
-  //       localStorage.getItem("userName") == "undefined" ||
-  //       localStorage.getItem("userName") === null
-  //     ) {
-  //       Navigate("/");
-  //     }
-  //   });
-
   return (
     <nav className="bg-primary navbar shadow-custom">
       <div className="container p-2">

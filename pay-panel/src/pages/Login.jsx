@@ -1,3 +1,16 @@
+/*
+Önbilgi:
+1- Import'lar: En üstte.
+2- State'ler: name, password, ve navigate bir arada.
+Not: password için setter yok (setPassword tanımlı değil), demo proje oldğu için yalnızca mockhachino'dan gelen response'a ve 
+kullanıcı adı inputunun dolu olup olmadığı kontrol ediliyor.
+3- Yardımcı Fonksiyonlar: notifyWarn ve notifyError bir grupta, çünkü bunlar genel amaçlı bildirim araçları.
+4- API İşlemleri: handleLogin fonksiyonu, API çağrısı ve yönlendirme yaptığı için bu kategoride. Asenkron işlem burada.
+5- Handler'lar: Bu kodda ayrı bir event handler yok, handleLogin hem API işlemi hem de olay yönetimi yapıyor.
+6- Render: En altta, UI oluşturma kısmı net bir şekilde ayrıldı.
+
+*/
+
 import React, { useState } from "react";
 import axios from "axios";
 import { IoIosLogIn } from "react-icons/io";
@@ -6,11 +19,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
+  // 1. State Tanımlamaları
   const [name, setName] = useState("");
   const [password] = useState("");
   const navigate = useNavigate();
 
-  // notify fonksiyonları (pop-up bildirimler)
+  // 2. Yardımcı Fonksiyonlar
   const notifyWarn = (message) => {
     toast.warn(message, {
       position: "top-right",
@@ -37,6 +51,7 @@ function Login() {
     });
   };
 
+  // 3. API İşlemleri
   const handleLogin = async () => {
     if (!name) {
       notifyWarn("Kullanıcı adı boş olamaz!");
@@ -47,7 +62,7 @@ function Login() {
       service_val_name: name,
       service_val_password: password,
     };
-	
+
     try {
       const response = await axios.post(
         "https://www.mockachino.com/1b9b9eca-13b9-41/login",
@@ -55,12 +70,12 @@ function Login() {
       );
       console.log("API Yanıtı:", response.data);
 
-      if (response.data.result == "success") {
+      if (response.data.result === "success") {
         localStorage.setItem("userName", name);
 
         toast.success("Giriş başarılı, Yönlendiriliyorsunuz!", {
           position: "top-right",
-          autoClose: 2000,
+          autoClose: 1500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: false,
@@ -68,10 +83,9 @@ function Login() {
           theme: "dark",
         });
 
-        // notify  için gecikme
         setTimeout(() => {
           navigate("/App/Dashboard");
-        }, 2200);
+        }, 1500);
       } else {
         navigate("/");
       }
@@ -80,6 +94,7 @@ function Login() {
     }
   };
 
+  // 4. Render
   return (
     <div className="d-flex justify-content-center align-items-center min-vh-100 login-container">
       <ToastContainer />

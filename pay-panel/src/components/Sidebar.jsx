@@ -27,7 +27,7 @@ function Sidebar() {
             </li>
             <hr className="text-tertiary w-50 align-self-center" />
             <li className="nav-item">
-              <a href="/App/Showdata" className="nav-link text-primary">
+              <a href="/App/Tables" className="nav-link text-primary">
                 Komisyonları Görüntüle <GoPeople size={"22"} />
               </a>
             </li>
