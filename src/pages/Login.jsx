@@ -102,7 +102,7 @@ function Login() {
         <div className="card border-tertiary bg-primary shadow-custom-3 col-xl-4 col-xxl-3 col-lg-6 col-md-8 col-sm-10 col-11 p-4 p-md-5">
           <div className="my-4 text-center">
             <img
-              src="/paylogoyeni.svg"
+              src="paylogoyeni.svg"
               alt="PAY Logo"
               className="card-img-top logo-img"
               style={{ width: "250px", height: "150px" }}

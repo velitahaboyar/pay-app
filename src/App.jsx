@@ -7,12 +7,10 @@ import Login from "./pages/Login.jsx";
 import Newdata from "./pages/Newdata.jsx";
 import Tables from "./pages/Tables.jsx";
 
-// QueryClient'ı oluştur
 const queryClient = new QueryClient();
 
 function App() {
   return (
-    // Tüm Routes'u QueryClientProvider ile sar
     <QueryClientProvider client={queryClient}>
       <Routes>
         <Route path="/" element={<Login />} />
