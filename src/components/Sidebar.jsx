@@ -3,6 +3,7 @@ import "../css/sidebar.css";
 import { MdQueryStats } from "react-icons/md";
 import { GoPersonAdd } from "react-icons/go";
 import { GoPeople } from "react-icons/go";
+import { Link } from "react-router-dom";
 
 function Sidebar() {
   return (
