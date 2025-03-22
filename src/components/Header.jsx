@@ -17,7 +17,7 @@ function Header({ isMobile, isMenuOpen, setIsMenuOpen }) {
       <div className="container p-2">
         <div className="d-flex justify-content-between align-items-center w-100">
           <div id="logo-div">
-            <Link to="/" className="navbar-brand">
+            <Link to="Dashboard" className="navbar-brand">
               <img src="paylogoyeni.svg" width="100" height="70" alt="Logo" />
             </Link>
           </div>
