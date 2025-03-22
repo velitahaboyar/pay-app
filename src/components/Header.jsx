@@ -2,6 +2,7 @@ import { ImExit } from "react-icons/im";
 import { PiHandHeartDuotone } from "react-icons/pi";
 import { Dropdown } from "react-bootstrap";
 import { FaBars } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Header({ isMobile, isMenuOpen, setIsMenuOpen }) {
   const name = localStorage.getItem("userName");
