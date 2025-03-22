@@ -53,19 +53,19 @@ function AppLayout() {
           <div id="nav-links" className="navbar-collapse">
             <ul className="navbar-nav text-center">
               <li className="nav-item">
-                <Link to="/App/Dashboard" className="nav-link text-primary">
+                <Link to="Dashboard" className="nav-link text-primary">
                   Dashboard <MdQueryStats size={"24"} />
                 </Link>
               </li>
               <hr className="text-tertiary w-50 align-self-center" />
               <li className="nav-item">
-                <Link to="/App/Newdata" className="nav-link text-primary">
+                <Link to="Newdata" className="nav-link text-primary">
                   Yeni Komisyon Ekle <GoPersonAdd size={"24"} />
                 </Link>
               </li>
               <hr className="text-tertiary w-50 align-self-center" />
               <li className="nav-item">
-                <Link to="/App/Tables" className="nav-link text-primary">
+                <Link to="Tables" className="nav-link text-primary">
                   Komisyonları Görüntüle <MdPeople size={"22"} />
                 </Link>
               </li>
