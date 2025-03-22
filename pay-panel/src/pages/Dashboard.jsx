@@ -15,7 +15,7 @@ const Dashboard = () => {
 
   // 2. Yardımcı Fonksiyonlar
   const formatCurrency = (value) => {
-    const numericValue = Number(value).toFixed(2); // 2 ondalık basamak
+    const numericValue = Number(value).toFixed(2); 
     const [integerPart, decimalPart] = numericValue.split(".");
     const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     return `${formattedInteger},${decimalPart}`;

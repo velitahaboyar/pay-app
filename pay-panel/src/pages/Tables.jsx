@@ -199,7 +199,6 @@ const Tables = () => {
     <div className="container-fluid my-3">
       <ToastContainer />
       <div className="row g-4">
-        {/* Soldaki Tablo */}
         <div className="col-lg-8 col-md-12 col-sm-12 col-12">
           <div className="card bg-primary p-3 shadow-custom-2 rounded-4">
             <div className="card-body">
@@ -255,7 +254,6 @@ const Tables = () => {
           </div>
         </div>
 
-        {/* Sağdaki Kontrol Paneli */}
         <div className="col-lg-4 col-md-12 col-sm-12 col-12">
           <div className="card bg-primary p-3 shadow-custom-2 rounded-4 h-100">
             <div className="card-body d-flex flex-column justify-content-between">

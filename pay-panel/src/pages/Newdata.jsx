@@ -17,6 +17,7 @@ import axios from "axios";
 import { addSale } from "../js/addSale";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../css/custom-button.css"
 
 function Newdata() {
   // 1. State Tanımlamaları
@@ -223,7 +224,6 @@ function Newdata() {
   const handleTelChange = (e) => {
     const value = e.target.value;
     if (/^\d*$/.test(value) && value.length <= 10) {
-      // Sadece rakam ve max 10 karakter
       setPersonTel(value);
     }
   };
@@ -431,7 +431,7 @@ function Newdata() {
                           required
                           autoComplete="off"
                           value={personTel}
-                          onChange={handleTelChange} // Yeni handler
+                          onChange={handleTelChange} 
                         />
                         <sub className="text-tertiary">
                           *Telefon numarasını başında 0 olmadan giriniz.
@@ -550,7 +550,7 @@ function Newdata() {
                           onChange={handleSalesAmountChange}
                         />
                         <button
-                          className="btn btn-outline-quaternary-custom w-25 text-tertiary"
+                          className="btn btn-outline-quaternary-custom w-25 mobile-wider text-tertiary"
                           onClick={(e) => {
                             e.preventDefault();
                             handleAddSale();

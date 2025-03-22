@@ -1,0 +1,10 @@
+/* Varsayılan olarak Bootstrap w-25 kullanılacak (masaüstü) */
+.mobile-wider {
+	width: 25%;
+  }
+  
+  @media (max-width: 575.98px) {
+	.mobile-wider {
+	  width: 50% !important; 
+	}
+  }
