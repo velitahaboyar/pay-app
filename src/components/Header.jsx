@@ -15,11 +15,10 @@ function Header({ isMobile, isMenuOpen, setIsMenuOpen }) {
     >
       <div className="container p-2">
         <div className="d-flex justify-content-between align-items-center w-100">
-          {/* Logo */}
           <div id="logo-div">
-            <a href="/" className="navbar-brand">
+            <Link to="/" className="navbar-brand">
               <img src="paylogoyeni.svg" width="100" height="70" alt="Logo" />
-            </a>
+            </Link>
           </div>
 
           <div className="d-flex align-items-center">
@@ -70,8 +69,8 @@ function Header({ isMobile, isMenuOpen, setIsMenuOpen }) {
                   </button>
                 ) : (
                   <div className="nav-item">
-                    <a
-                      href="#"
+                    <Link
+                      to="#"
                       className="nav-link text-primary fw-bold"
                       id="exit-button"
                     >
@@ -81,7 +80,7 @@ function Header({ isMobile, isMenuOpen, setIsMenuOpen }) {
                       >
                         Çıkış Yap <ImExit size={"18"} />
                       </button>
-                    </a>
+                    </Link>
                   </div>
                 )}
               </div>
