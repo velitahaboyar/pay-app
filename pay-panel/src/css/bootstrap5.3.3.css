@@ -2408,9 +2408,9 @@ textarea.form-control-lg {
   }
 }
 .form-select:focus {
-  border-color: #86b7fe;
+  border-color: #f0ba0a;
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  box-shadow: 0 0 0 0.25rem rgba(255, 208, 0, 0.123);
 }
 .form-select[multiple],
 .form-select[size]:not([size="1"]) {

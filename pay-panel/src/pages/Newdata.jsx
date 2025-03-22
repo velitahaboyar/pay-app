@@ -1,4 +1,4 @@
-/* 
+/*
 Önbilgi:
 1- Import'lar: En üstte,
 2- State'ler: Hepsini bir arada topladım.
@@ -7,7 +7,7 @@
 5- Event Handler'lar: handle*Change fonksiyonlarını ayrı bir grup yaptım, çünkü bunlar UI etkileşimlerini yönetiyor.
 6- useEffect'ler: Veri çekme işlemleri yan etkiler olarak bir arada, sırayla okunması kolay.
 7- Render: En altta, çünkü bu kısım UI'yi oluşturuyor ve diğer her şey buna hizmet ediyor.
-Bu düzen, kodu inceleyen birinin önce "Neler tanımlı?", sonra "Hangi araçlar var?", ardından "Veri nasıl işleniyor?" ve en son "UI nasıl görünüyor?" diye adım adım takip etmesini sağlar. 
+Bu düzen, kodu inceleyen birinin önce "Neler tanımlı?", sonra "Hangi araçlar var?", ardından "Veri nasıl işleniyor?" ve en son "UI nasıl görünüyor?" diye adım adım takip etmesini sağlar.
 */
 
 import React, { useEffect, useState } from "react";
@@ -170,15 +170,15 @@ function Newdata() {
     try {
       const saleData = {
         personTel: selectedPerson.split("|")[1].trim(),
-        personName: selectedPerson.split("|")[0].trim(), // personName eklendi
+        personName: selectedPerson.split("|")[0].trim(),
         productName: selectedGroup.split("|")[0].trim(),
         salesAmount,
       };
 
-      console.log("Gönderilen saleData:", saleData); // Hata ayıklamak için
+      console.log("Gönderilen saleData:", saleData);
 
       const result = await addSale(saleData);
-      console.log("addSale sonucu:", result); // Hata ayıklamak için
+      console.log("addSale sonucu:", result);
 
       if (result.success) {
         notifySuccess("Satış başarıyla eklendi!");
@@ -217,6 +217,14 @@ function Newdata() {
     const value = e.target.value;
     if (value === "" || isValidName(value)) {
       setPersonName(value);
+    }
+  };
+
+  const handleTelChange = (e) => {
+    const value = e.target.value;
+    if (/^\d*$/.test(value) && value.length <= 10) {
+      // Sadece rakam ve max 10 karakter
+      setPersonTel(value);
     }
   };
 
@@ -311,7 +319,7 @@ function Newdata() {
                           id="productName"
                           name="productName"
                           type="text"
-                          className="form-control"
+                          className="form-control bg-dark text-primary"
                           maxLength={"100"}
                           required
                           autoComplete="off"
@@ -328,7 +336,7 @@ function Newdata() {
                           name="productPrice"
                           type="text"
                           value={productPrice}
-                          className="form-control"
+                          className="form-control bg-dark fw-bold text-primary"
                           maxLength={"12"}
                           autoComplete="off"
                           max={"100000"}
@@ -348,7 +356,7 @@ function Newdata() {
                               id="comPercentage"
                               name="comPercentage"
                               type="number"
-                              className="form-control text-end no-spinner rounded-2"
+                              className="form-control bg-dark text-primary fw-bold text-end no-spinner rounded-2"
                               max="100"
                               min="1"
                               autoComplete="off"
@@ -400,7 +408,7 @@ function Newdata() {
                           id="personName"
                           name="personName"
                           type="text"
-                          className="form-control"
+                          className="form-control bg-dark text-primary"
                           maxLength={"40"}
                           minLength={"3"}
                           required
@@ -417,13 +425,13 @@ function Newdata() {
                           id="personTel"
                           name="personTel"
                           type="tel"
-                          className="form-control"
+                          className="form-control bg-dark text-primary fw-bold"
                           pattern="[1-9]{3}[0-9]{3}[0-9]{4}"
                           maxLength={10}
                           required
                           autoComplete="off"
                           value={personTel}
-                          onChange={(e) => setPersonTel(e.target.value)}
+                          onChange={handleTelChange} // Yeni handler
                         />
                         <sub className="text-tertiary">
                           *Telefon numarasını başında 0 olmadan giriniz.
@@ -478,7 +486,7 @@ function Newdata() {
                       <select
                         name="selectComPerson"
                         id="selectComPerson"
-                        className="form-select"
+                        className="form-select bg-dark text-primary"
                         required
                         value={selectedPerson}
                         onChange={(e) => setSelectedPerson(e.target.value)}
@@ -505,7 +513,7 @@ function Newdata() {
                       <select
                         name="selectComGroup"
                         id="selectComGroup"
-                        className="form-select"
+                        className="form-select bg-dark text-primary"
                         required
                         value={selectedGroup}
                         onChange={(e) => setSelectedGroup(e.target.value)}
@@ -533,7 +541,7 @@ function Newdata() {
                           type="number"
                           name="salesAmount"
                           id="salesAmount"
-                          className="form-control w-25"
+                          className="form-control w-25 bg-dark text-primary fw-bold"
                           min={1}
                           max={50}
                           autoComplete="off"

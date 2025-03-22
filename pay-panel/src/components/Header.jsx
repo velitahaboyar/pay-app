@@ -30,7 +30,7 @@ function Header() {
               <div className="d-flex align-items-center gap-3">
                 <Dropdown>
                   <Dropdown.Toggle
-                    className="btn-outline-quaternary-custom"
+                    className="btn-outline-quaternary-custom text-primary"
                     variant="btn-outline-quaternary-custom"
                   >
                     {name}
@@ -66,7 +66,7 @@ function Header() {
                       className="btn btn-outline-tertiary"
                       id="btn-hover-none"
                     >
-                      Çıkış Yap <ImExit size={"18"}/>
+                      Çıkış Yap <ImExit size={"18"} />
                     </button>
                   </a>
                 </div>
