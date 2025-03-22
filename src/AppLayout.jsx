@@ -6,6 +6,7 @@ import { MdQueryStats, MdPeople } from "react-icons/md";
 import { GoPersonAdd } from "react-icons/go";
 import { ImExit } from "react-icons/im";
 import "./css/sidebar.css";
+import { Link } from "react-router-dom";
 
 function AppLayout() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
