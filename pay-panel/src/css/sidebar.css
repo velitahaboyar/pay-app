@@ -1,12 +1,37 @@
-/* sidebar'da bulunan linklere scale efekti baslangıcı*/
+/* sidebar.css */
 
+/* Sidebar'da bulunan linklere scale efekti */
 .nav-item {
-  transition: all 0.2s;
-}
-
-.nav-item:hover {
-  scale: 1.05;
-}
-
-/* sidebar'da bulunan linklere scale efekti bitisi*/
-
+	transition: all 0.2s;
+  }
+  
+  .nav-item:hover {
+	scale: 1.05;
+  }
+  
+  /* Menü başlangıçta gizli - Yukarıdan katlanma için */
+  .fold-menu {
+	transform: translateY(-100%);
+	transform-origin: top;
+	animation: foldDown 0.3s ease-in-out forwards; /* Açıldığında direkt oynar */
+  }
+  
+  /* Kapanma için ek sınıf kaldırıldı, display ile yönetilecek */
+  @keyframes foldDown {
+	from {
+	  transform: translateY(-100%);
+	}
+	to {
+	  transform: translateY(0);
+	}
+  }
+  
+  /* Mobil menü için ek stil */
+  @media (max-width: 767px) {
+	#nav-links .navbar-nav {
+	  padding: 1rem;
+	}
+	.nav-link {
+	  font-size: 1.1rem;
+	}
+  }

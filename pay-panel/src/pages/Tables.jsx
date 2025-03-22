@@ -196,11 +196,11 @@ const Tables = () => {
   if (isLoading) return <div className="text-primary">Yükleniyor...</div>;
 
   return (
-    <div className="container my-3">
+    <div className="container-fluid my-3">
       <ToastContainer />
       <div className="row g-4">
         {/* Soldaki Tablo */}
-        <div className="col-lg-8 col-md-7 col-sm-12">
+        <div className="col-lg-8 col-md-12 col-sm-12 col-12">
           <div className="card bg-primary p-3 shadow-custom-2 rounded-4">
             <div className="card-body">
               <h3 className="text-primary text-center mb-3">
@@ -243,7 +243,7 @@ const Tables = () => {
                                   maximumFractionDigits: 2,
                                 })}{" "}
                                 TL
-                              </td>{" "}
+                              </td>
                             </tr>
                           )) || []
                       )
@@ -256,7 +256,7 @@ const Tables = () => {
         </div>
 
         {/* Sağdaki Kontrol Paneli */}
-        <div className="col-lg-4 col-md-5 col-sm-12">
+        <div className="col-lg-4 col-md-12 col-sm-12 col-12">
           <div className="card bg-primary p-3 shadow-custom-2 rounded-4 h-100">
             <div className="card-body d-flex flex-column justify-content-between">
               <h4 className="text-primary text-center mb-3">Satış Düzenle</h4>

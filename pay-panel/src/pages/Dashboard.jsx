@@ -1,17 +1,7 @@
-/* 
-Önbilgi:
-1- Import'lar: En üstte, tüm ikonlar ve bağımlılıklar bir arada.
-2- State'ler: totalSales, totalProfit, ve totalCommission başa toplandı.
-3- Yardımcı Fonksiyonlar: formatCurrency burada tek yardımcı fonksiyon.
-4- useEffect: Veri çekme ve hesaplama kısmı, yan etkiler.
-5- Render: En altta, UI oluşturma kısmı net bir şekilde ayrıldı.
-*/
-
 import React, { useState, useEffect } from "react";
 import { HiOutlineRocketLaunch } from "react-icons/hi2";
 import { PiHandHeartDuotone } from "react-icons/pi";
-import { GiReceiveMoney } from "react-icons/gi";
-import { GiPayMoney } from "react-icons/gi";
+import { GiReceiveMoney, GiPayMoney } from "react-icons/gi";
 import { FcSalesPerformance } from "react-icons/fc";
 import { FaTurkishLiraSign } from "react-icons/fa6";
 import { FaChartLine } from "react-icons/fa";
@@ -20,8 +10,8 @@ import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 const Dashboard = () => {
   // 1. State Tanımlamaları
   const [totalSales, setTotalSales] = useState(0);
-  const [totalProfit, setTotalProfit] = useState(0); 
-  const [totalCommission, setTotalCommission] = useState(0); 
+  const [totalProfit, setTotalProfit] = useState(0);
+  const [totalCommission, setTotalCommission] = useState(0);
 
   // 2. Yardımcı Fonksiyonlar
   const formatCurrency = (value) => {
@@ -57,11 +47,12 @@ const Dashboard = () => {
   // 4. Render
   return (
     <div className="container-fluid d-flex align-items-center justify-content-center gap-4 flex-column my-3">
+      {/* Hoşgeldiniz Kartı */}
       <div className="d-flex container-fluid justify-content-center w-100">
         <div className="row w-100 justify-content-center align-items-center">
-          <div className="">
-            <div className="card d-flex p-sm-4 p-4 p-xl-3 p-xxl-4 justify-content-center bg-primary rounded-4 border-tertiary">
-              <div className="card-body container-fluid shadow-custom rounded-4 p-sm-3 p-xl-4 p-md-3 p-lg-3">
+          <div className="col-12">
+            <div className="card d-flex p-4 justify-content-center bg-primary rounded-4 border-tertiary">
+              <div className="card-body container-fluid shadow-custom rounded-4 p-3">
                 <h2 className="card-title text-primary text-center">
                   <span className="text-tertiary fw-bold">PAY</span>'a
                   Hoşgeldiniz <PiHandHeartDuotone className="text-tertiary" />
@@ -89,7 +80,7 @@ const Dashboard = () => {
                       Komisyon kayıtlarınızı kolayca oluşturun, düzenleyin ve
                       takip edin. İş ortaklarınızla yaptığınız anlaşmaları tek
                       bir platformda yönetin, süreçlerinizi daha şeffaf ve
-                      verimli hale getirin. <br />
+                      verimli hale getirin.
                     </p>
                   </div>
                 </div>
@@ -99,30 +90,32 @@ const Dashboard = () => {
         </div>
       </div>
 
+      {/* İstatistik Kartı */}
       <div className="d-flex container-fluid justify-content-center w-100">
-        <div className="container-fluid justify-content-center align-items-center">
-          <div className="card d-flex p-sm-4 p-4 p-xl-3 p-xxl-4 justify-content-center bg-primary rounded-4 border-tertiary">
-            <div className="container-fluid">
-              <div className="card bg-primary rounded-4 shadow-custom">
-                <div className="card-body container-fluid p-sm-3 p-xl-4 p-md-3 p-lg-3">
-                  <div className="d-flex align-items-center flex-column justify-content-center">
-                    <h3 className="card-title text-primary fw-bold">
-                      Komisyonlarım
-                    </h3>
-                    <hr className="w-25 text-tertiary" />
-                  </div>
-                  <div className="container text-primary d-flex align-items-center justify-content-between">
-                    <div>
-                      <h4 className="fw-bold">
-                        <MdOutlineProductionQuantityLimits
-                          className="text-tertiary me-2"
-                          size={"22"}
-                        />
-                        Toplam Satış Adedi :
-                      </h4>
-                    </div>
+        <div className="row w-100 justify-content-center align-items-center">
+          <div className="col-12">
+            <div className="card d-flex p-4 justify-content-center bg-primary rounded-4 border-tertiary">
+              <div className="card-body container-fluid shadow-custom rounded-4 p-3">
+                <div className="d-flex align-items-center flex-column justify-content-center">
+                  <h3 className="card-title text-primary fw-bold">
+                    Komisyonlarım
+                  </h3>
+                  <hr className="w-25 text-tertiary" />
+                </div>
+
+                {/* İstatistikler */}
+                <div className="container-fluid text-primary">
+                  {/* Toplam Satış Adedi */}
+                  <div className="d-flex flex-column flex-sm-row align-items-center justify-content-between mb-3">
+                    <h4 className="fw-bold fs-5 fs-sm-4">
+                      <MdOutlineProductionQuantityLimits
+                        className="text-tertiary me-2"
+                        size={"22"}
+                      />
+                      Toplam Satış Adedi:
+                    </h4>
                     <div className="d-flex align-items-center">
-                      <h3>{totalSales}</h3>
+                      <h3 className="fs-4 fs-sm-3">{totalSales}</h3>
                       <FaChartLine
                         size={"20"}
                         className="text-tertiary mb-2 ms-2"
@@ -130,32 +123,18 @@ const Dashboard = () => {
                     </div>
                   </div>
                   <hr className="text-primary" />
-                  <div className="container text-primary d-flex align-items-center justify-content-between">
-                    <div>
-                      <h4 className="fw-bold">
-                        <FcSalesPerformance
-                          className="text-tertiary me-2"
-                          size={"22"}
-                        />
-                        Toplam Satış :
-                      </h4>
-                    </div>
-                    <div className="d-flex align-items-center">
-                      <h3>{formatCurrency(totalProfit)}</h3>
-                      <FaTurkishLiraSign
-                        size={"20"}
-                        className="text-tertiary mb-2 ms-1"
+
+                  {/* Toplam Satış */}
+                  <div className="d-flex flex-column flex-sm-row align-items-center justify-content-between mb-3">
+                    <h4 className="fw-bold fs-5 fs-sm-4">
+                      <FcSalesPerformance
+                        className="text-tertiary me-2"
+                        size={"22"}
                       />
-                    </div>
-                  </div>
-                  <hr className="text-primary" />
-                  <div className="container text-primary d-flex align-items-center justify-content-between">
-                    <h4 className="fw-bold">
-                      <GiPayMoney className="text-tertiary me-2" size={"22"} />
-                      Toplam Komisyon Maliyeti :
+                      Toplam Satış:
                     </h4>
                     <div className="d-flex align-items-center">
-                      <h3>{formatCurrency(totalCommission)}</h3>
+                      <h3 className="fs-4 fs-sm-3">{formatCurrency(totalProfit)}</h3>
                       <FaTurkishLiraSign
                         size={"20"}
                         className="text-tertiary mb-2 ms-1"
@@ -163,18 +142,34 @@ const Dashboard = () => {
                     </div>
                   </div>
                   <hr className="text-primary" />
-                  <div className="container text-primary d-flex align-items-center justify-content-between">
-                    <div>
-                      <h4 className="fw-bold">
-                        <GiReceiveMoney
-                          className="text-tertiary me-2"
-                          size={"22"}
-                        />
-                        Toplam Kazanç :
-                      </h4>
-                    </div>
+
+                  {/* Toplam Komisyon Maliyeti */}
+                  <div className="d-flex flex-column flex-sm-row align-items-center justify-content-between mb-3">
+                    <h4 className="fw-bold fs-5 fs-sm-4">
+                      <GiPayMoney className="text-tertiary me-2" size={"22"} />
+                      Toplam Komisyon Maliyeti:
+                    </h4>
                     <div className="d-flex align-items-center">
-                      <h3>{formatCurrency(totalProfit - totalCommission)}</h3>
+                      <h3 className="fs-4 fs-sm-3">{formatCurrency(totalCommission)}</h3>
+                      <FaTurkishLiraSign
+                        size={"20"}
+                        className="text-tertiary mb-2 ms-1"
+                      />
+                    </div>
+                  </div>
+                  <hr className="text-primary" />
+
+                  {/* Toplam Kazanç */}
+                  <div className="d-flex flex-column flex-sm-row align-items-center justify-content-between mb-3">
+                    <h4 className="fw-bold fs-5 fs-sm-4">
+                      <GiReceiveMoney
+                        className="text-tertiary me-2"
+                        size={"22"}
+                      />
+                      Toplam Kazanç:
+                    </h4>
+                    <div className="d-flex align-items-center">
+                      <h3 className="fs-4 fs-sm-3">{formatCurrency(totalProfit - totalCommission)}</h3>
                       <FaTurkishLiraSign
                         size={"20"}
                         className="text-tertiary mb-2 ms-1"
