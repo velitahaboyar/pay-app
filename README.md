@@ -1,3 +1,56 @@
+# TR - Turkish
+
+# PAY - Komisyon Yönetim Paneli
+
+**Komisyon Yönetimini Kolaylaştırın!**  
+**PAY**, KOBİ’ler için geliştirilmiş kullanıcı dostu bir komisyon yönetim uygulamasıdır.
+
+Bu proje ile iş ortaklarınızla yaptığınız komisyon anlaşmalarını kolayca takip edebilirsiniz. Komisyon kayıtlarını hızlıca oluşturun, düzenleyin ve yönetin. Süreçlerinizi daha şeffaf ve verimli hale getirin.
+
+## Özellikler
+✅ **Komisyon Yönetimi**: Satış bazlı komisyonları kolayca hesaplayın.  
+✅ **Kullanıcı Dostu Arayüz**: Hızlı erişim için basit ve sezgisel bir panel.  
+✅ **Veri Depolama**: Satış bilgileri `localStorage` kullanılarak saklanır.  
+✅ **Ürün Bazlı Kayıtlar**: Komisyonları grup yerine ürün isimlerine göre takip edin.  
+✅ **Bootstrap Entegrasyonu**: **Bootstrap 5.3.3** ile modern ve şık tasarım.
+
+## Canlı Demo
+Projeyi aşağıdaki bağlantıdan canlı olarak inceleyebilirsiniz:  
+🔗 **[Canlı Demo](velitahaboyar.github.io/pay-app/)**
+
+## Kullanılan Teknolojiler
+- **React** - 
+- **Bootstrap 5.3.3** - 
+- **Vite** - 
+
+## Dosya Yapısı
+```
+pay-app/
+│── public/                 # Statik dosyalar (favicon, logo vb.)
+│── src/
+│   ├── components/         # Bileşenler (Sidebar, Header vb.)
+│   ├── css/                # Stil dosyaları (Bootstrap ve özel CSS dosyaları)
+│   ├── js/                 # JavaScript yardımcı dosyaları
+│   ├── pages/              # Sayfa bileşenleri (Dashboard, Login, Tables vb.)
+│   ├── App.js              # Ana uygulama bileşeni
+│   ├── main.js             # React uygulama giriş noktası
+│── index.html              # Uygulama giriş dosyası
+│── package.json            # Proje bağımlılıkları ve komut dosyaları
+│── vite.config.js          # Vite yapılandırma dosyası
+```
+
+## Lisans
+Bu proje **MIT Lisansı** altında lisanslanmıştır.
+
+---
+Önemli Notlar: 
+1- Projede bir authentication bulunmamaktadır. Bir dummy HTTP request ve kullanıcı adı inputunun bir değere sahip olup olmadığı konuyu pekiştirme amacıyla kullanılmıştır.
+2- "Satış Ekle" kısmındaki veriler GET & POST metodlarını pekiştirmek amacıyla dummy API servisinden gelmektedir.
+3- API'den gelen ve satış ekledikten sonra son kullanıcının eliyle eklediği veriler localStorage'a kaydolur. Dashboard'da ve "Komisyonları Görüntüle" sayfasında görünen ve dinamik olarak değiştirilebilen bu veriler tamamen localStorage üzerinden işlenir.  
+---
+
+# EN - English
+
 # PAY - Commission Management Panel
 
 **Simplify Your Commission Management!**  
@@ -23,7 +76,7 @@ You can access the live version of the project via the following link:
 
 ## File Structure
 ```
-pay-panel/
+pay-app/
 │── public/                 # Static files (favicon, logo, etc.)
 │── src/
 │   ├── components/         # Components (Sidebar, Header, etc.)
@@ -37,18 +90,14 @@ pay-panel/
 │── vite.config.js          # Vite configuration file
 ```
 
-## Contributing
-If you want to contribute to this project:
-1. Fork the repository
-2. Create a new branch: `git checkout -b new-feature`
-3. Make your changes and commit them: `git commit -m 'Added new feature'`
-4. Push to the branch: `git push origin new-feature`
-5. Open a **Pull Request** (PR)!
-
 ## License
 This project is licensed under the **MIT License**.
 
----
 
-🎯 **Manage your commissions more efficiently with PAY!**
+---
+Important Notes:
+1- There is no authentication in the project. A dummy HTTP request and whether the username input has a value or not are used to reinforce the issue.
+2- The data in the "Satış Ekle" section comes from the dummy API service to reinforce the GET & POST methods.
+3- The data coming from the API and added by the end user after adding a sale is saved to localStorage. This data, which appears on the Dashboard and "Komisyonları Görüntüle" page and can be changed dynamically, is processed entirely through localStorage.
+---
 
