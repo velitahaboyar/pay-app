@@ -14,22 +14,22 @@ function Sidebar() {
         <div id="nav-links" className="navbar-collapse mt-4">
           <ul className="navbar-nav text-center">
             <li className="nav-item">
-              <a href="/App/Dashboard" className="nav-link text-primary">
+              <Link to="Dashboard" className="nav-link text-primary">
                 Dashboard <MdQueryStats size={"24"} />
-              </a>
+              </Link>
             </li>
             <hr className="text-tertiary w-50 align-self-center" />
 
             <li className="nav-item">
-              <a href="/App/Newdata" className="nav-link text-primary">
+              <Link to="Newdata" className="nav-link text-primary">
                 Yeni Komisyon Ekle <GoPersonAdd size={"24"} />
-              </a>
+              </Link>
             </li>
             <hr className="text-tertiary w-50 align-self-center" />
             <li className="nav-item">
-              <a href="/App/Tables" className="nav-link text-primary">
+              <Link to="Tables" className="nav-link text-primary">
                 Komisyonları Görüntüle <GoPeople size={"22"} />
-              </a>
+              </Link>
             </li>
             <hr className="text-tertiary w-50 align-self-center" />
           </ul>

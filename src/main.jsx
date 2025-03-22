@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./css/bootstrap-5.3.3-minified.css";
-import { HashRouter } from "react-router";
+import { HashRouter } from "react-router-dom";
 import App from "./App.jsx";
 import "bootstrap-icons/font/bootstrap-icons.css";
 

@@ -18,7 +18,7 @@ function App() {
           <Route path="Dashboard" element={<Dashboard />} />
           <Route path="Newdata" element={<Newdata />} />
           <Route path="Tables" element={<Tables />} />
-          <Route path="*" element={<Navigate to="/App/Dashboard" />} />
+          <Route path="*" element={<Navigate to="Dashboard" />} />
         </Route>
       </Routes>
     </QueryClientProvider>
