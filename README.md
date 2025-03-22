@@ -16,7 +16,7 @@ Bu proje ile iş ortaklarınızla yaptığınız komisyon anlaşmalarını kolay
 
 ## Canlı Demo
 Projeyi aşağıdaki bağlantıdan canlı olarak inceleyebilirsiniz:  
-🔗 **[Canlı Demo](velitahaboyar.github.io/pay-app/)**
+🔗 **[Canlı Demo](https://velitahaboyar.github.io/pay-app/)**
 
 ## Kullanılan Teknolojiler
 - **React** - 
