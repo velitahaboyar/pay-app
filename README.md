@@ -44,7 +44,7 @@ Bu proje **MIT Lisansı** altında lisanslanmıştır.
 
 ---
 
-Önemli Notlar: 
+## Önemli Notlar: 
 
 1- Projede bir authentication bulunmamaktadır. Bir dummy HTTP request ve kullanıcı adı inputunun bir değere sahip olup olmadığı konuyu pekiştirme amacıyla kullanılmıştır. <br /> <br />
 2- "Satış Ekle" kısmındaki veriler GET & POST metodlarını pekiştirmek amacıyla dummy API servisinden gelmektedir. <br /> <br />
@@ -99,7 +99,7 @@ This project is licensed under the **MIT License**.
 
 ---
 
-Important Notes:
+## Important Notes:
 
 1- There is no authentication in the project. A dummy HTTP request and whether the username input has a value or not are used to reinforce the issue. <br /> <br />
 2- The data in the "Satış Ekle" section comes from the dummy API service to reinforce the GET & POST methods. <br /> <br />
