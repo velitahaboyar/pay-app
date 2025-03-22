@@ -43,10 +43,13 @@ pay-app/
 Bu proje **MIT Lisansı** altında lisanslanmıştır.
 
 ---
+
 Önemli Notlar: 
+
 1- Projede bir authentication bulunmamaktadır. Bir dummy HTTP request ve kullanıcı adı inputunun bir değere sahip olup olmadığı konuyu pekiştirme amacıyla kullanılmıştır.
 2- "Satış Ekle" kısmındaki veriler GET & POST metodlarını pekiştirmek amacıyla dummy API servisinden gelmektedir.
 3- API'den gelen ve satış ekledikten sonra son kullanıcının eliyle eklediği veriler localStorage'a kaydolur. Dashboard'da ve "Komisyonları Görüntüle" sayfasında görünen ve dinamik olarak değiştirilebilen bu veriler tamamen localStorage üzerinden işlenir.  
+
 ---
 
 # EN - English
@@ -95,9 +98,12 @@ This project is licensed under the **MIT License**.
 
 
 ---
+
 Important Notes:
+
 1- There is no authentication in the project. A dummy HTTP request and whether the username input has a value or not are used to reinforce the issue.
 2- The data in the "Satış Ekle" section comes from the dummy API service to reinforce the GET & POST methods.
 3- The data coming from the API and added by the end user after adding a sale is saved to localStorage. This data, which appears on the Dashboard and "Komisyonları Görüntüle" page and can be changed dynamically, is processed entirely through localStorage.
+
 ---
 
