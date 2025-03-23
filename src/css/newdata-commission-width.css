@@ -1,0 +1,9 @@
+.custom-width-sm {
+  width: 25%;
+}
+
+@media (max-width: 575.98px) {
+  .custom-width-sm {
+    width: 50% !important;
+  }
+}

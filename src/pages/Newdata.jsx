@@ -17,7 +17,8 @@ import axios from "axios";
 import { addSale } from "../js/addSale";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../css/custom-button.css"
+import "../css/custom-button.css";
+import "../css/newdata-commission-width.css";
 
 function Newdata() {
   // 1. State Tanımlamaları
@@ -351,7 +352,7 @@ function Newdata() {
                           Komisyon Yüzdesi:
                         </label>
                         <div className="d-flex align-items-center justify-content-between">
-                          <div className="input-group w-25 form-outline">
+                          <div className="input-group form-outline custom-width-sm">
                             <input
                               id="comPercentage"
                               name="comPercentage"
@@ -371,7 +372,7 @@ function Newdata() {
                             />
                             <VscPercentage
                               className="align-self-center mx-1"
-                              size={"20"}
+                              size={"24"}
                             />
                           </div>
                           <button
@@ -431,7 +432,7 @@ function Newdata() {
                           required
                           autoComplete="off"
                           value={personTel}
-                          onChange={handleTelChange} 
+                          onChange={handleTelChange}
                         />
                         <sub className="text-tertiary">
                           *Telefon numarasını başında 0 olmadan giriniz.
