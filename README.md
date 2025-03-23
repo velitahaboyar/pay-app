@@ -19,9 +19,9 @@ Projeyi aşağıdaki bağlantıdan canlı olarak inceleyebilirsiniz:
 🔗 **[Canlı Demo](https://velitahaboyar.github.io/pay-app/)**
 
 ## Kullanılan Teknolojiler
-- **React** - 
-- **Bootstrap 5.3.3** - 
-- **Vite** - 
+- **React**
+- **Bootstrap 5.3.3**
+- **Vite**
 
 ## Dosya Yapısı
 ```
@@ -74,9 +74,9 @@ You can access the live version of the project via the following link:
 🔗 **[Live Demo](https://velitahaboyar.github.io/pay-app/)**
 
 ## Technologies Used
-- **React** - For building the user interface
-- **Bootstrap 5.3.3** - For responsive and stylish design
-- **Vite** - For a fast development environment
+- **React**
+- **Bootstrap 5.3.3**
+- **Vite**
 
 ## File Structure
 ```
