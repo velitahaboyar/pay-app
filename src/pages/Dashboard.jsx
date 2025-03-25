@@ -178,7 +178,7 @@ const Dashboard = () => {
                     </h4>
                     <div className="d-flex align-items-center">
                       <h3 className="fs-4 fs-sm-3">
-                        {formatCurrency(totalProfit - totalCommission)}
+                        {formatCurrency(totalSalesAmount - totalCommission)}
                       </h3>
                       <FaTurkishLiraSign
                         size={"20"}
