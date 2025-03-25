@@ -12,10 +12,11 @@ const Dashboard = () => {
   const [totalSales, setTotalSales] = useState(0);
   const [totalProfit, setTotalProfit] = useState(0);
   const [totalCommission, setTotalCommission] = useState(0);
+  const [totalSalesAmount, setTotalSalesAmount] = useState(0);
 
   // 2. Yardımcı Fonksiyonlar
   const formatCurrency = (value) => {
-    const numericValue = Number(value).toFixed(2); 
+    const numericValue = Number(value).toFixed(2);
     const [integerPart, decimalPart] = numericValue.split(".");
     const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     return `${formattedInteger},${decimalPart}`;
@@ -26,21 +27,24 @@ const Dashboard = () => {
     const userSalesData = localStorage.getItem("userSalesData");
     if (userSalesData) {
       const salesArray = JSON.parse(userSalesData);
+      let totalSales = 0;
       let totalSalesAmount = 0;
       let totalProfitAmount = 0;
       let totalCommissionAmount = 0;
 
       salesArray.forEach((user) => {
         user.salesRecords.forEach((record) => {
-          totalSalesAmount += record.sales;
+          totalSales += record.sales;
           totalProfitAmount += record.profit;
           totalCommissionAmount += record.commission;
+          totalSalesAmount += record.totalSalesAmount;
         });
       });
 
-      setTotalSales(totalSalesAmount);
+      setTotalSales(totalSales);
       setTotalProfit(totalProfitAmount);
       setTotalCommission(totalCommissionAmount);
+      setTotalSalesAmount(totalSalesAmount);
     }
   }, []);
 
@@ -134,7 +138,9 @@ const Dashboard = () => {
                       Toplam Satış:
                     </h4>
                     <div className="d-flex align-items-center">
-                      <h3 className="fs-4 fs-sm-3">{formatCurrency(totalProfit)}</h3>
+                      <h3 className="fs-4 fs-sm-3">
+                        {formatCurrency(totalSalesAmount)}
+                      </h3>
                       <FaTurkishLiraSign
                         size={"20"}
                         className="text-tertiary mb-2 ms-1"
@@ -150,7 +156,9 @@ const Dashboard = () => {
                       Toplam Komisyon Maliyeti:
                     </h4>
                     <div className="d-flex align-items-center">
-                      <h3 className="fs-4 fs-sm-3">{formatCurrency(totalCommission)}</h3>
+                      <h3 className="fs-4 fs-sm-3">
+                        {formatCurrency(totalCommission)}
+                      </h3>
                       <FaTurkishLiraSign
                         size={"20"}
                         className="text-tertiary mb-2 ms-1"
@@ -169,7 +177,9 @@ const Dashboard = () => {
                       Toplam Kazanç:
                     </h4>
                     <div className="d-flex align-items-center">
-                      <h3 className="fs-4 fs-sm-3">{formatCurrency(totalProfit - totalCommission)}</h3>
+                      <h3 className="fs-4 fs-sm-3">
+                        {formatCurrency(totalProfit - totalCommission)}
+                      </h3>
                       <FaTurkishLiraSign
                         size={"20"}
                         className="text-tertiary mb-2 ms-1"

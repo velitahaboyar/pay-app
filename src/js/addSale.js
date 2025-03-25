@@ -49,9 +49,11 @@ export function addSale(saleData) {
       existingRecord.sales += sales;
       existingRecord.commission += commission;
       existingRecord.profit += profit;
+      existingRecord.totalSalesAmount += totalSalesAmount;
     } else {
       // Yeni ürünse ekle
       user.salesRecords.push({
+        totalSalesAmount,
         productName,
         sales,
         commission,
@@ -67,6 +69,7 @@ export function addSale(saleData) {
       personName,
       salesRecords: [
         {
+          totalSalesAmount,
           productName,
           sales,
           commission,
